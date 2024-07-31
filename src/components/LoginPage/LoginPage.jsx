@@ -17,11 +17,10 @@ const LoginPage = () => {
 
     const onSendData = useCallback(async () => {
 
-        console.log('queryId', queryId)
+        const data = {login, password, queryId}
 
-        const data = {login, password, grant_type: 'password'}
-
-        let response = await fetch('https://api.claris.su/main/Token', {
+        // let response =
+            await fetch('http://tg.gm-cloud.ru:8000', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -29,12 +28,12 @@ const LoginPage = () => {
             body: JSON.stringify(data)
         })
 
-        if (response.ok) {
-            let json = response.json()
-            alert(json)
-        } else {
-            alert('Error' + response.status)
-        }
+        // if (response.ok) {
+        //     let json = response.json()
+        //     alert(json)
+        // } else {
+        //     alert('Error' + response.status)
+        // }
 
     }, [login, password, queryId])
 
