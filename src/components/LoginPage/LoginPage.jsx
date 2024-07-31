@@ -7,12 +7,36 @@ const LoginPage = () => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
 
-    const {tg} = useTelegram()
+    const {tg, queryId} = useTelegram()
+    //
+    // const onSendData = useCallback(() => {
+    //     const data = {login, password}
+    //     tg.sendData(JSON.stringify(data))
+    // }, [login, password, tg])
 
-    const onSendData = useCallback(() => {
-        const data = {login, password}
-        tg.sendData(JSON.stringify(data))
-    }, [login, password, tg])
+
+    const onSendData = useCallback(async () => {
+
+        console.log('queryId', queryId)
+
+        const data = {login, password, grant_type: 'password'}
+
+        let response = await fetch('https://api.claris.su/main/Token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        if (response.ok) {
+            let json = response.json()
+            alert(json)
+        } else {
+            alert('Error' + response.status)
+        }
+
+    }, [login, password, tg, queryId])
 
 
     useEffect(() => {
@@ -26,7 +50,7 @@ const LoginPage = () => {
 
     useEffect(() => {
         tg.MainButton.setParams({
-            text: 'Отправить данные'
+            text: 'Вход'
         })
     }, [tg.MainButton])
 
