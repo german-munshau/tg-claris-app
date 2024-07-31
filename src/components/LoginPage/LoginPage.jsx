@@ -19,7 +19,7 @@ const LoginPage = () => {
 
         const data = {login, password, queryId}
 
-        // let response =
+         let response =
             await fetch('http://tg.gm-cloud.ru:8000/web-data', {
             method: 'POST',
             headers: {
@@ -28,12 +28,12 @@ const LoginPage = () => {
             body: JSON.stringify(data)
         })
 
-        // if (response.ok) {
-        //     let json = response.json()
-        //     alert(json)
-        // } else {
-        //     alert('Error' + response.status)
-        // }
+        if (response.ok) {
+            let json = response.json()
+            alert(json)
+        } else {
+            alert('Error' + response.status)
+        }
 
     }, [login, password, queryId])
 
