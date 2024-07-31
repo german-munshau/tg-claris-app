@@ -36,7 +36,7 @@ const LoginPage = () => {
             alert('Error' + response.status)
         }
 
-    }, [login, password, tg, queryId])
+    }, [login, password, queryId])
 
 
     useEffect(() => {
