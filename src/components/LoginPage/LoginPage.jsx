@@ -20,7 +20,7 @@ const LoginPage = () => {
         const data = {login, password, queryId}
 
         // let response =
-            await fetch('http://tg.gm-cloud.ru:8000', {
+            await fetch('http://tg.gm-cloud.ru:8000/web-data', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
