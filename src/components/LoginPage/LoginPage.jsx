@@ -6,21 +6,12 @@ const LoginPage = () => {
 
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
-
     const {tg, queryId} = useTelegram()
-    //
-    // const onSendData = useCallback(() => {
-    //     const data = {login, password}
-    //     tg.sendData(JSON.stringify(data))
-    // }, [login, password, tg])
-
 
     const onSendData = useCallback(async () => {
-
         const data = {login, password, queryId}
-
          let response =
-            await fetch('https://tg.gm-cloud.ru/web-data', {
+            await fetch('https://tg.gm-cloud.ru/auth', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -40,7 +31,6 @@ const LoginPage = () => {
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
-
         return () => {
             tg.offEvent('mainButtonClicked', onSendData)
         }
@@ -69,7 +59,6 @@ const LoginPage = () => {
         setPassword(e.target.value)
     }
 
-
     return (<div className={'form'}>
             <h3>Вход в систему</h3>
             <input className={'input'}
@@ -78,7 +67,6 @@ const LoginPage = () => {
                    value={login}
                    onChange={onChangeLogin}
             />
-
             <input className={'input'}
                    type={'password'}
                    placeholder={'Пароль'}
