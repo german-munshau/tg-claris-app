@@ -17,9 +17,11 @@ const DocumentPage = () => {
 
     useEffect(() => {
         // запрос в бота для получения данных по документу
-        fetch(`https://tg.gm-cloud.ru/document/${number}`)
-            .then(data => setDocument(data))
-            .catch(e => console.log(e))
+        if (number) {
+            fetch(`https://tg.gm-cloud.ru/document/${number}`)
+                .then(data => setDocument(data))
+                .catch(e => console.log(e))
+        }
     }, [number])
 
 
