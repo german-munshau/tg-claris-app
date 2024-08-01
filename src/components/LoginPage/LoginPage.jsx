@@ -76,12 +76,17 @@ const LoginPage = () => {
                    type={'text'}
                    placeholder={'Логин'}
                    value={login}
-                   onChange={onChangeLogin}/>
+                   onChange={onChangeLogin}
+                   autoComplete={'off'}
+            />
+
             <input className={'input'}
                    type={'password'}
                    placeholder={'Пароль'}
                    value={password}
-                   onChange={onChangePassword}/>
+                   onChange={onChangePassword}
+                   autoComplete={'on'}
+            />
         </div>
     )
 };
