@@ -1,8 +1,8 @@
 import {Route, Routes} from "react-router-dom";
 import MainPage from "./components/MainPage/MainPage";
 import LoginPage from "./components/LoginPage/LoginPage";
-import './App.css';
 import DocumentPage from "./components/DocumentPage/DocumentPage";
+import './App.css';
 
 function App() {
     return (

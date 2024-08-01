@@ -3,6 +3,7 @@ import {useLocation} from "react-router-dom";
 
 const DocumentPage = () => {
     const [number, setNumber] = useState(null)
+    const [document, setDocument] = useState(null)
     const location = useLocation();
 
     const getDocumentNumber = (path) => {
@@ -13,9 +14,19 @@ const DocumentPage = () => {
         setNumber(getDocumentNumber(location.pathname))
     }, [location.pathname])
 
+
+    useEffect(() => {
+        // запрос в бота для получения данных по документу
+        fetch(`https://tg.gm-cloud.ru/document/${number}`)
+            .then(data => setDocument(data))
+            .catch(e => console.log(e))
+    }, [number])
+
+
     return (
         <div>
             Document № {number}
+            Data - {document}
         </div>
     );
 };
