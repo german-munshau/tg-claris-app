@@ -77,7 +77,6 @@ const LoginPage = () => {
                    placeholder={'Логин'}
                    value={login}
                    onChange={onChangeLogin}
-                   autoComplete={'off'}
             />
 
             <input className={'input'}
@@ -85,7 +84,6 @@ const LoginPage = () => {
                    placeholder={'Пароль'}
                    value={password}
                    onChange={onChangePassword}
-                   autoComplete={'on'}
             />
         </div>
     )
