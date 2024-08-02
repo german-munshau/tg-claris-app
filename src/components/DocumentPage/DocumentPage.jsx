@@ -6,7 +6,7 @@ import ButtonPanel from "../ButtonPanel/ButtonPanel";
 import './document-page.css'
 
 
-const doc = {
+const document = {
     number: 123456,
     autoNumber: 2,
     serialNumber: 4,
@@ -18,7 +18,7 @@ const doc = {
     responsible: {name: 'Хоруженко Елена'},
     content: 'тест согласования'
 }
-const docDetails = [
+const details = [
     {
         date: '2022-11-11T08:48:30+03:00',
         agreed: 'Отклонено',
@@ -77,8 +77,8 @@ const docDetails = [
 
 const DocumentPage = () => {
     const [number, setNumber] = useState(null)
-    const [document, setDocument] = useState(doc)
-    const [details, setDetails] = useState(docDetails)
+    // const [document, setDocument] = useState(null)
+    // const [details, setDetails] = useState([])
     const location = useLocation();
 
     const getDocumentNumber = (path) => {
