@@ -113,12 +113,29 @@ const DocumentPage = () => {
     //
     // }, [number])
 
-    const onAgreeHandle = () => {
-        console.log('onAgreeHandle')
+    const onAgreeHandle = async () => {
+
+        await fetch(`https://tg.gm-cloud.ru/document/${number}/agree`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({comment: 'telegram agree'})
+        })
+
         onClose()
     }
-    const onDisagreeHandle = () => {
-        console.log('onDisagreeHandle')
+    const onDisagreeHandle = async () => {
+
+        await fetch(`https://tg.gm-cloud.ru/document/${number}/disagree`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({comment: 'telegram disagree'})
+        })
+
+
         onClose()
     }
 
