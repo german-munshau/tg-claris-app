@@ -36,7 +36,7 @@ const DocumentPage = () => {
     return (
         <div>
             Document № {number}
-            Data - {document?.id}
+            Data - {document}
         </div>
     );
 };
