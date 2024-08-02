@@ -16,3 +16,9 @@ td, th {
     max-height: 62vh;
     overflow-y: auto;
 }
+
+.document-details-title {
+    padding: 10px 0 0 10px;
+    font-family: monospace;
+    font-size: large;
+}
