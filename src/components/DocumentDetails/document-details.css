@@ -1,16 +1,18 @@
 table {
-    border: 0 solid black;
+    border: none;
     width: 100%;
 }
 
 th {
-    /*background-color: whitesmoke;*/
 }
 
 td, th {
     font-family: monospace;
+    padding: 5px;
 }
 
 .document-details-container {
     padding: 10px;
+    /*max-height: 50vh;*/
+    overflow-y: auto;
 }
