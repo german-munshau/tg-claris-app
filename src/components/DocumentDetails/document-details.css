@@ -1,0 +1,16 @@
+table {
+    border: 0 solid black;
+    width: 100%;
+}
+
+th {
+    background-color: whitesmoke;
+}
+
+td, th {
+    font-family: monospace;
+}
+
+.document-details-container {
+    padding: 10px;
+}

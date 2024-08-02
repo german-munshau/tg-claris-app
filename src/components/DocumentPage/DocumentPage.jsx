@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import TextField from "../TextField/TextField";
+import DocumentDetails from "../DocumentDetails/DocumentDetails";
 import './document-page.css'
-import DocumentItem from "../DocumentItem/DocumentItem";
 
 //
 // const doc = {
@@ -17,10 +17,27 @@ import DocumentItem from "../DocumentItem/DocumentItem";
 //     responsible: {name: 'Хоруженко Елена'},
 //     content: 'тест согласования'
 // }
-
-
-
-
+//
+// const docDetails = [
+//     {
+//         date: '2022-11-11T08:48:30+03:00',
+//         agreed: 'Отклонено',
+//         comment: 'не подходит формулировка',
+//         author: {name: 'Польшаков Сергей'}
+//     },
+//     {
+//         date: '2022-11-13T08:46:47+03:00',
+//         agreed: 'Согласовано',
+//         comment: 'не подходит fghfhg fggfhjghj формулировка',
+//         author: {name: 'Пуцарь Виталий'}
+//     },
+//     {
+//         date: '2022-11-12T08:48:30+03:00',
+//         agreed: 'Отклонено',
+//         comment: 'не подходит формулировка',
+//         author: {name: 'Польшаков Сергей'}
+//     },
+// ]
 
 
 const DocumentPage = () => {
@@ -72,10 +89,8 @@ const DocumentPage = () => {
             <TextField label={'Автор'} text={document?.author?.name}/>
             <TextField label={'Ответственный'} text={document?.responsible?.name}/>
             <TextField label={'Содержание'} text={document?.content}/>
-            <hr/>
-            <span>Детали:</span>
 
-            {details.map(item => <DocumentItem item={item}/>)}
+            <DocumentDetails data={details}/>
         </div>
     );
 };
