@@ -4,3 +4,49 @@
     flex-direction: column;
     align-items: flex-start;
 }
+
+/*flex: 1 0 auto;!*Три*!*/
+
+.container {
+    width: 1024px;
+    height: auto;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+.box-container {
+    width: 30%;
+    height: auto;
+    border: 2px solid gray;
+    display: flex;/* Раз */
+    flex-direction: column;/*Два*/
+}
+
+.box-header {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 22px;
+    border-bottom: 1px solid lightgray;
+    background: rgb(230, 255, 230);
+}
+
+.box-main {
+    padding: 10px;
+    flex: 1 0 auto;/*Три*/
+    background: rgb(255, 255, 230);
+}
+
+.box-footer {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 22px;
+    border-top: 1px solid lightgray;
+    background: rgb(230, 247, 255);
+}
