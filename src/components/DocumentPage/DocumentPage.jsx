@@ -36,7 +36,9 @@ const DocumentPage = () => {
     return (
         <div>
             Document № {number}
-            Data - {document}
+            autoNumber - {document?.autoNumber}
+            serialNumber - {document?.serialNumber}
+            status = {document?.state?.name}
         </div>
     );
 };
