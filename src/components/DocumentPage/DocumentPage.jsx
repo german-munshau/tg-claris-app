@@ -1,85 +1,86 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
+import {useTelegram} from "../../hooks/useTelegram";
 import TextField from "../TextField/TextField";
 import DocumentDetails from "../DocumentDetails/DocumentDetails";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
 import './document-page.css'
-import {useTelegram} from "../../hooks/useTelegram";
 
 
-const document = {
-    number: 123456,
-    autoNumber: 2,
-    serialNumber: 4,
-    state: {name: 'На согласовании'},
-    agreementState: {name: 'возвращено Инициатору'},
-    category: {name: 'Письмо'},
-    company: {name: 'АльтСофт'},
-    author: {name: 'Хоруженко Елена'},
-    responsible: {name: 'Хоруженко Елена'},
-    content: 'тест согласования'
-}
-const details = [
-    {
-        date: '2022-11-11T08:48:30+03:00',
-        agreed: 'Отклонено',
-        comment: 'не подходит формулировка',
-        author: {name: 'Польшаков Сергей'}
-    },
-    {
-        date: '2022-11-13T08:46:47+03:00',
-        agreed: 'Согласовано',
-        comment: 'не подходит fghfhg fggfhjghj формулировка',
-        author: {name: 'Пуцарь Виталий'}
-    },
-    {
-        date: '2022-11-12T08:48:30+03:00',
-        agreed: 'Отклонено',
-        comment: 'не подходит формулировка',
-        author: {name: 'Польшаков Сергей'}
-    },
-    {
-        date: '2022-11-11T08:48:30+03:00',
-        agreed: 'Отклонено',
-        comment: 'не подходит формулировка',
-        author: {name: 'Польшаков Сергей'}
-    },
-    {
-        date: '2022-11-13T08:46:47+03:00',
-        agreed: 'Согласовано',
-        comment: 'не подходит fghfhg fggfhjghj формулировка',
-        author: {name: 'Пуцарь Виталий'}
-    },
-    {
-        date: '2022-11-12T08:48:30+03:00',
-        agreed: 'Отклонено',
-        comment: 'не подходит формулировка',
-        author: {name: 'Польшаков Сергей'}
-    },
-    {
-        date: '2022-11-11T08:48:30+03:00',
-        agreed: 'Отклонено',
-        comment: 'не подходит формулировка',
-        author: {name: 'Польшаков Сергей'}
-    },
-    {
-        date: '2022-11-13T08:46:47+03:00',
-        agreed: 'Согласовано',
-        comment: 'не подходит fghfhg fggfhjghj формулировка',
-        author: {name: 'Пуцарь Виталий'}
-    },
-    {
-        date: '2022-11-12T08:48:30+03:00',
-        agreed: 'Отклонено',
-        comment: 'не подходит формулировка',
-        author: {name: 'Польшаков Сергей'}
-    },
-]
+//
+// const document = {
+//     number: 123456,
+//     autoNumber: 2,
+//     serialNumber: 4,
+//     state: {name: 'На согласовании'},
+//     agreementState: {name: 'возвращено Инициатору'},
+//     category: {name: 'Письмо'},
+//     company: {name: 'АльтСофт'},
+//     author: {name: 'Хоруженко Елена'},
+//     responsible: {name: 'Хоруженко Елена'},
+//     content: 'тест согласования'
+// }
+// const details = [
+//     {
+//         date: '2022-11-11T08:48:30+03:00',
+//         agreed: 'Отклонено',
+//         comment: 'не подходит формулировка',
+//         author: {name: 'Польшаков Сергей'}
+//     },
+//     {
+//         date: '2022-11-13T08:46:47+03:00',
+//         agreed: 'Согласовано',
+//         comment: 'не подходит fghfhg fggfhjghj формулировка',
+//         author: {name: 'Пуцарь Виталий'}
+//     },
+//     {
+//         date: '2022-11-12T08:48:30+03:00',
+//         agreed: 'Отклонено',
+//         comment: 'не подходит формулировка',
+//         author: {name: 'Польшаков Сергей'}
+//     },
+//     {
+//         date: '2022-11-11T08:48:30+03:00',
+//         agreed: 'Отклонено',
+//         comment: 'не подходит формулировка',
+//         author: {name: 'Польшаков Сергей'}
+//     },
+//     {
+//         date: '2022-11-13T08:46:47+03:00',
+//         agreed: 'Согласовано',
+//         comment: 'не подходит fghfhg fggfhjghj формулировка',
+//         author: {name: 'Пуцарь Виталий'}
+//     },
+//     {
+//         date: '2022-11-12T08:48:30+03:00',
+//         agreed: 'Отклонено',
+//         comment: 'не подходит формулировка',
+//         author: {name: 'Польшаков Сергей'}
+//     },
+//     {
+//         date: '2022-11-11T08:48:30+03:00',
+//         agreed: 'Отклонено',
+//         comment: 'не подходит формулировка',
+//         author: {name: 'Польшаков Сергей'}
+//     },
+//     {
+//         date: '2022-11-13T08:46:47+03:00',
+//         agreed: 'Согласовано',
+//         comment: 'не подходит fghfhg fggfhjghj формулировка',
+//         author: {name: 'Пуцарь Виталий'}
+//     },
+//     {
+//         date: '2022-11-12T08:48:30+03:00',
+//         agreed: 'Отклонено',
+//         comment: 'не подходит формулировка',
+//         author: {name: 'Польшаков Сергей'}
+//     },
+// ]
 
 const DocumentPage = () => {
     const [number, setNumber] = useState(null)
-    // const [document, setDocument] = useState(null)
-    // const [details, setDetails] = useState([])
+    const [document, setDocument] = useState(null)
+    const [details, setDetails] = useState([])
     const location = useLocation();
     const {onClose} = useTelegram();
 
@@ -92,26 +93,26 @@ const DocumentPage = () => {
     }, [location.pathname])
 
 
-    // useEffect(() => {
-    //     // запрос в бота для получения данных по документу
-    //
-    //     (async () => {
-    //
-    //         if (number) {
-    //             // загрузка шапки документа
-    //             const doc = await fetch(`https://tg.gm-cloud.ru/document/${number}`)
-    //             const docJson = await doc.json()
-    //             setDocument(docJson)
-    //
-    //             //загрузка деталей документа
-    //             const docDetails = await fetch(`https://tg.gm-cloud.ru/documentDetails/${number}`)
-    //             const docDetailsJson = await docDetails.json()
-    //             setDetails(docDetailsJson)
-    //
-    //         }
-    //     })()
-    //
-    // }, [number])
+    useEffect(() => {
+        // запрос в бота для получения данных по документу
+
+        (async () => {
+
+            if (number) {
+                // загрузка шапки документа
+                const doc = await fetch(`https://tg.gm-cloud.ru/document/${number}`)
+                const docJson = await doc.json()
+                setDocument(docJson)
+
+                //загрузка деталей документа
+                const docDetails = await fetch(`https://tg.gm-cloud.ru/documentDetails/${number}`)
+                const docDetailsJson = await docDetails.json()
+                setDetails(docDetailsJson)
+
+            }
+        })()
+
+    }, [number])
 
     const onAgreeHandle = async () => {
 
