@@ -4,6 +4,7 @@ import TextField from "../TextField/TextField";
 import DocumentDetails from "../DocumentDetails/DocumentDetails";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
 import './document-page.css'
+import {useTelegram} from "../../hooks/useTelegram";
 
 
 const document = {
@@ -80,6 +81,7 @@ const DocumentPage = () => {
     // const [document, setDocument] = useState(null)
     // const [details, setDetails] = useState([])
     const location = useLocation();
+    const {onClose} = useTelegram();
 
     const getDocumentNumber = (path) => {
         return path.split('/')[2]
@@ -111,6 +113,14 @@ const DocumentPage = () => {
     //
     // }, [number])
 
+    const onAgreeHandle = () => {
+        console.log('onAgreeHandle')
+        onClose()
+    }
+    const onDisagreeHandle = () => {
+        console.log('onDisagreeHandle')
+        onClose()
+    }
 
     return (
         <div className={"document-page-container"}>
@@ -128,7 +138,7 @@ const DocumentPage = () => {
             </div>
             <DocumentDetails data={details}/>
 
-            <ButtonPanel/>
+            <ButtonPanel agree={onAgreeHandle} disagree={onDisagreeHandle}/>
         </div>
 
 

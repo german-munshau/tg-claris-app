@@ -1,14 +1,14 @@
 import React from 'react';
 import './button-panel.css'
 
-const ButtonPanel = () => {
+const ButtonPanel = ({agree, disagree}) => {
     return (
         <div className={'button-container'}>
             <div className={'button-item'}>
-                <button>Согласовать</button>
+                <button onClick={agree}>Согласовать</button>
             </div>
             <div className={'button-item'}>
-                <button>Отклонить</button>
+                <button onClick={disagree}>Отклонить</button>
             </div>
         </div>
     );
