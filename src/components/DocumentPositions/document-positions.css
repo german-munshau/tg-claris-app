@@ -6,7 +6,13 @@ table {
 
 thead {
     position: sticky;
+    background-color: white;
     top: 0;
+}
+
+tbody {
+    overflow-y: scroll;
+    height: 300px;
 }
 
 td, th {
@@ -34,4 +40,6 @@ td, th {
 
 .document-position-container {
     padding-top: 10px;
+    /*overflow-y: scroll;*/
+    /*height: 300px;*/
 }

@@ -5,7 +5,7 @@ import './document-positions.css'
 const DocumentPositions = ({data}) => {
     return (
         <div className={'document-position-container'}>
-            <span className={"document-position-title"}>Позиции:</span>
+            {/*<span className={"document-position-title"}>Позиции:</span>*/}
             <table>
                 <thead>
                 <tr>
