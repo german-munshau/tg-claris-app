@@ -1,9 +1,9 @@
 import React from 'react';
 import {getDate} from "../../utils/utils";
-import './document-item.css'
+import './agreementhistory-item.css'
 
 
-const DocumentItem = ({item}) => {
+const AgreementHistoryItem = ({item}) => {
     return (
         <div className={'document-item'}>
             <div><b>Дата: </b> {item.date && getDate(item.date)}</div>
@@ -14,4 +14,4 @@ const DocumentItem = ({item}) => {
     );
 };
 
-export default DocumentItem;
+export default AgreementHistoryItem;
