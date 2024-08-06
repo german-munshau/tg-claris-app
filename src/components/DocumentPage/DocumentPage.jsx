@@ -247,9 +247,9 @@ const DocumentPage = () => {
 
                 setLoading(true)
 
-                if (!!docJson) {
-                    setError(true)
-                }
+                // if (!!docJson) {
+                //     setError(true)
+                // }
             }
         })()
 
@@ -279,6 +279,7 @@ const DocumentPage = () => {
     const renderData = () => {
         return (<div className={"document-page-container"}>
             <div>
+                <div>{document}</div>
                 {/*<TextField label={'Документ'} text={number}/>*/}
                 {/*<TextField label={'Автономер'} text={document?.autoNumber}/>*/}
                 {/*<TextField label={'Серийный номер'} text={document?.serialNumber}/>*/}
