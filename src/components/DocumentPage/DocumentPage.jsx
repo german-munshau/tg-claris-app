@@ -212,6 +212,7 @@ const DocumentPage = () => {
     const [positions, setPositions] = useState([])
     // const [agreementHistory, setAgreementHistory] = useState([])
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
     const location = useLocation();
     const {onClose} = useTelegram();
 
@@ -243,7 +244,12 @@ const DocumentPage = () => {
                 // const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${number}`)
                 // const docAgreementHistoryJson = await docAgreementHistory.json()
                 // setAgreementHistory(docAgreementHistoryJson)
+
                 setLoading(true)
+
+                if (!!docJson) {
+                    setError(true)
+                }
             }
         })()
 
@@ -270,27 +276,31 @@ const DocumentPage = () => {
         onClose()
     }
 
+    const renderData = () => {
+        return (<div className={"document-page-container"}>
+            <div>
+                {/*<TextField label={'Документ'} text={number}/>*/}
+                {/*<TextField label={'Автономер'} text={document?.autoNumber}/>*/}
+                {/*<TextField label={'Серийный номер'} text={document?.serialNumber}/>*/}
+                <TextField label={'Категория'} text={document?.category?.name}/>
+                <TextField label={'Компания'} text={document?.company?.name}/>
+                <TextField label={'Автор'} text={document?.author?.name}/>
+                <TextField label={'Ответственный'} text={document?.responsible?.name}/>
+                <TextField label={'Содержание'} text={document?.content}/>
+                <TextField label={'Статус документа'} text={document?.state?.name}/>
+                <TextField label={'Статус согласования'} text={document?.agreementState?.name}/>
+            </div>
+            <DocumentPositions data={positions}/>
+            {/*<AgreementHistory data={agreementHistory}/>*/}
+            <ButtonPanel agree={onAgreeHandle} disagree={onDisagreeHandle}/>
+        </div>)
+
+    }
     return (
         <>
-            {loading ? <div className={"document-page-container"}>
-                    <div>
-                        {/*<TextField label={'Документ'} text={number}/>*/}
-                        {/*<TextField label={'Автономер'} text={document?.autoNumber}/>*/}
-                        {/*<TextField label={'Серийный номер'} text={document?.serialNumber}/>*/}
-                        <TextField label={'Категория'} text={document?.category?.name}/>
-                        <TextField label={'Компания'} text={document?.company?.name}/>
-                        <TextField label={'Автор'} text={document?.author?.name}/>
-                        <TextField label={'Ответственный'} text={document?.responsible?.name}/>
-                        <TextField label={'Содержание'} text={document?.content}/>
-                        <TextField label={'Статус документа'} text={document?.state?.name}/>
-                        <TextField label={'Статус согласования'} text={document?.agreementState?.name}/>
-                    </div>
-                    <DocumentPositions data={positions}/>
-                    {/*<AgreementHistory data={agreementHistory}/>*/}
-                    <ButtonPanel agree={onAgreeHandle} disagree={onDisagreeHandle}/>
-                </div>
-                :  <div className="loader"></div>
-            }
+            {!loading && <div className="loader"></div>}
+            {loading && !error && renderData()}
+            {loading && error && <div>Не найден</div>}
         </>
     );
 };
