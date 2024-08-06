@@ -290,7 +290,7 @@ const DocumentPage = () => {
 
                     <ButtonPanel agree={onAgreeHandle} disagree={onDisagreeHandle}/>
                 </>
-                : <span>LOADING...</span>
+                : <div className="loader"></div>
             }
         </div>
 
