@@ -279,7 +279,7 @@ const DocumentPage = () => {
     const renderData = () => {
         return (<div className={"document-page-container"}>
             <div>
-                <div>{document}</div>
+                <div>{JSON.stringify(document)}</div>
                 {/*<TextField label={'Документ'} text={number}/>*/}
                 {/*<TextField label={'Автономер'} text={document?.autoNumber}/>*/}
                 {/*<TextField label={'Серийный номер'} text={document?.serialNumber}/>*/}
@@ -299,9 +299,9 @@ const DocumentPage = () => {
     }
     return (
         <>
-            {!loading && <div className="loader"></div>}
-            {loading && document ? renderData() : <div>Не найден</div>}
-
+            {/*{!loading && <div className="loader"></div>}*/}
+            {/*{loading && document ? renderData() : <div>Не найден</div>}*/}
+            {renderData()}
         </>
     );
 };
