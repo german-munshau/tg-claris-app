@@ -212,7 +212,7 @@ const DocumentPage = () => {
     const [positions, setPositions] = useState([])
     // const [agreementHistory, setAgreementHistory] = useState([])
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(false)
+    // const [error, setError] = useState(false)
     const location = useLocation();
     const {onClose} = useTelegram();
 
@@ -300,8 +300,8 @@ const DocumentPage = () => {
     return (
         <>
             {!loading && <div className="loader"></div>}
-            {loading && !error && renderData()}
-            {loading && error && <div>Не найден</div>}
+            {loading && document ? renderData() : <div>Не найден</div>}
+
         </>
     );
 };
