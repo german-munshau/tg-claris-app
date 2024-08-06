@@ -279,7 +279,7 @@ const DocumentPage = () => {
     const renderData = (document) => {
         if (Object.keys(document).length === 0) {
             return (
-                <div>Не найден</div>
+                <div className={"center document-not-found"}>Не найден</div>
             )
         } else
             return (
@@ -305,7 +305,7 @@ const DocumentPage = () => {
 
     return (
         <>
-            {loading ? renderData(document) : <div className="loader"></div>}
+            {loading ? renderData(document) : <div className="center loader"></div>}
         </>
     );
 };
