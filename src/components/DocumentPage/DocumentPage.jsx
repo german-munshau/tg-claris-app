@@ -271,8 +271,8 @@ const DocumentPage = () => {
     }
 
     return (
-        <div className={"document-page-container"}>
-            {loading ? <>
+        <>
+            {loading ? <div className={"document-page-container"}>
                     <div>
                         {/*<TextField label={'Документ'} text={number}/>*/}
                         {/*<TextField label={'Автономер'} text={document?.autoNumber}/>*/}
@@ -289,11 +289,11 @@ const DocumentPage = () => {
                     <DocumentPositions data={positions}/>
 
                     <ButtonPanel agree={onAgreeHandle} disagree={onDisagreeHandle}/>
-                </>
+                </div>
                 : <div className="loader"></div>
             }
-        </div>
 
+        </>
 
     );
 };
