@@ -276,32 +276,36 @@ const DocumentPage = () => {
         onClose()
     }
 
-    const renderData = () => {
-        return (
-            <div className={"document-page-container"}>
-                <div>
-                    <div>{JSON.stringify(document)}</div>
-                    {/*<TextField label={'Документ'} text={number}/>*/}
-                    {/*<TextField label={'Автономер'} text={document?.autoNumber}/>*/}
-                    {/*<TextField label={'Серийный номер'} text={document?.serialNumber}/>*/}
-                    <TextField label={'Категория'} text={document?.category?.name}/>
-                    <TextField label={'Компания'} text={document?.company?.name}/>
-                    <TextField label={'Автор'} text={document?.author?.name}/>
-                    <TextField label={'Ответственный'} text={document?.responsible?.name}/>
-                    <TextField label={'Содержание'} text={document?.content}/>
-                    <TextField label={'Статус документа'} text={document?.state?.name}/>
-                    <TextField label={'Статус согласования'} text={document?.agreementState?.name}/>
+    const renderData = (document) => {
+        if (Object.keys(document).length === 0) {
+            return (
+                <div>Не найден</div>
+            )
+        } else
+            return (
+                <div className={"document-page-container"}>
+                    <div>
+                        {/*<TextField label={'Документ'} text={number}/>*/}
+                        {/*<TextField label={'Автономер'} text={document?.autoNumber}/>*/}
+                        {/*<TextField label={'Серийный номер'} text={document?.serialNumber}/>*/}
+                        <TextField label={'Категория'} text={document?.category?.name}/>
+                        <TextField label={'Компания'} text={document?.company?.name}/>
+                        <TextField label={'Автор'} text={document?.author?.name}/>
+                        <TextField label={'Ответственный'} text={document?.responsible?.name}/>
+                        <TextField label={'Содержание'} text={document?.content}/>
+                        <TextField label={'Статус документа'} text={document?.state?.name}/>
+                        <TextField label={'Статус согласования'} text={document?.agreementState?.name}/>
+                    </div>
+                    <DocumentPositions data={positions}/>
+                    {/*<AgreementHistory data={agreementHistory}/>*/}
+                    <ButtonPanel agree={onAgreeHandle} disagree={onDisagreeHandle}/>
                 </div>
-                <DocumentPositions data={positions}/>
-                {/*<AgreementHistory data={agreementHistory}/>*/}
-                <ButtonPanel agree={onAgreeHandle} disagree={onDisagreeHandle}/>
-            </div>
-        )
-
+            )
     }
+
     return (
         <>
-            {loading ? renderData() : <div className="loader"></div>}
+            {loading ? renderData(document) : <div className="loader"></div>}
         </>
     );
 };
