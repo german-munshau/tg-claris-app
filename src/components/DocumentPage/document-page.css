@@ -29,5 +29,8 @@
 }
 
 .document-not-found {
-
+    font-family: monospace;
+    font-size: x-large;
+    width: 100px;
+    height: 25px;
 }
