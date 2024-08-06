@@ -211,6 +211,7 @@ const DocumentPage = () => {
     const [document, setDocument] = useState(null)
     const [positions, setPositions] = useState([])
     // const [agreementHistory, setAgreementHistory] = useState([])
+    const [loading, setLoading] = useState(false)
     const location = useLocation();
     const {onClose} = useTelegram();
 
@@ -227,7 +228,6 @@ const DocumentPage = () => {
         // запрос в бота для получения данных по документу
 
         (async () => {
-
             if (number) {
                 // загрузка шапки документа
                 const doc = await fetch(`https://tg.gm-cloud.ru/document/${number}`)
@@ -243,6 +243,7 @@ const DocumentPage = () => {
                 // const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${number}`)
                 // const docAgreementHistoryJson = await docAgreementHistory.json()
                 // setAgreementHistory(docAgreementHistoryJson)
+                setLoading(true)
             }
         })()
 
@@ -271,22 +272,26 @@ const DocumentPage = () => {
 
     return (
         <div className={"document-page-container"}>
-            <div>
-                {/*<TextField label={'Документ'} text={number}/>*/}
-                {/*<TextField label={'Автономер'} text={document?.autoNumber}/>*/}
-                {/*<TextField label={'Серийный номер'} text={document?.serialNumber}/>*/}
-                <TextField label={'Категория'} text={document?.category?.name}/>
-                <TextField label={'Компания'} text={document?.company?.name}/>
-                <TextField label={'Автор'} text={document?.author?.name}/>
-                <TextField label={'Ответственный'} text={document?.responsible?.name}/>
-                <TextField label={'Содержание'} text={document?.content}/>
-                <TextField label={'Статус документа'} text={document?.state?.name}/>
-                <TextField label={'Статус согласования'} text={document?.agreementState?.name}/>
-            </div>
-            {/*<AgreementHistory data={agreementHistory}/>*/}
-            <DocumentPositions data={positions}/>
+            {loading ? <>
+                    <div>
+                        {/*<TextField label={'Документ'} text={number}/>*/}
+                        {/*<TextField label={'Автономер'} text={document?.autoNumber}/>*/}
+                        {/*<TextField label={'Серийный номер'} text={document?.serialNumber}/>*/}
+                        <TextField label={'Категория'} text={document?.category?.name}/>
+                        <TextField label={'Компания'} text={document?.company?.name}/>
+                        <TextField label={'Автор'} text={document?.author?.name}/>
+                        <TextField label={'Ответственный'} text={document?.responsible?.name}/>
+                        <TextField label={'Содержание'} text={document?.content}/>
+                        <TextField label={'Статус документа'} text={document?.state?.name}/>
+                        <TextField label={'Статус согласования'} text={document?.agreementState?.name}/>
+                    </div>
+                    {/*<AgreementHistory data={agreementHistory}/>*/}
+                    <DocumentPositions data={positions}/>
 
-            <ButtonPanel agree={onAgreeHandle} disagree={onDisagreeHandle}/>
+                    <ButtonPanel agree={onAgreeHandle} disagree={onDisagreeHandle}/>
+                </>
+                : <span>LOADING...</span>
+            }
         </div>
 
 
