@@ -212,7 +212,6 @@ const DocumentPage = () => {
     const [positions, setPositions] = useState([])
     // const [agreementHistory, setAgreementHistory] = useState([])
     const [loading, setLoading] = useState(false)
-    // const [error, setError] = useState(false)
     const location = useLocation();
     const {onClose} = useTelegram();
 
@@ -227,7 +226,6 @@ const DocumentPage = () => {
 
     useEffect(() => {
         // запрос в бота для получения данных по документу
-
         (async () => {
             if (number) {
                 // загрузка шапки документа
@@ -244,12 +242,7 @@ const DocumentPage = () => {
                 // const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${number}`)
                 // const docAgreementHistoryJson = await docAgreementHistory.json()
                 // setAgreementHistory(docAgreementHistoryJson)
-
                 setLoading(true)
-
-                // if (!!docJson) {
-                //     setError(true)
-                // }
             }
         })()
 
