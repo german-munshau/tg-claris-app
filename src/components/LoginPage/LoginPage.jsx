@@ -6,10 +6,10 @@ const LoginPage = () => {
 
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
-    const {tg, queryId} = useTelegram()
+    const {user, queryId} = useTelegram()
 
     const onSendData = useCallback(async () => {
-        const data = {login, password, queryId, tg}
+        const data = {login, password, queryId, chatId: user.id}
         let response =
             await fetch('https://tg.gm-cloud.ru/auth', {
                 method: 'POST',
@@ -26,7 +26,7 @@ const LoginPage = () => {
             alert('Error' + response.status)
         }
 
-    }, [login, password, queryId, tg])
+    }, [login, password, queryId, user])
 
 
     useEffect(() => {
