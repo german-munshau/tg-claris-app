@@ -6,7 +6,7 @@ const LoginPage = () => {
 
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
-    const {user, queryId} = useTelegram()
+    const {tg, user, queryId} = useTelegram()
 
     const onSendData = useCallback(async () => {
         const data = {login, password, queryId, chatId: user.id}
