@@ -264,6 +264,20 @@ const DocumentPage = () => {
     }
 
     const renderData = (document) => {
+
+
+        if (!!document) {
+            return (
+                <div className={"center document-not-found"}>Нет документа</div>
+            )
+
+            // } else if (document.message) {
+            //     return (
+            //         <div className={"center document-not-found"}>{document.message}</div>
+            //     )
+
+        } else
+
         if (Object.keys(document).length === 0) {
             return (
                 <div className={"center document-not-found"}>Не найден</div>
