@@ -269,10 +269,10 @@ const DocumentPage = () => {
                 <div className={"center document-not-found"}>Не найден</div>
             )
 
-        } else if (document.message) {
-            return (
-                <div className={"center document-not-found"}>{document.message}</div>
-            )
+            // } else if (document.message) {
+            //     return (
+            //         <div className={"center document-not-found"}>{document.message}</div>
+            //     )
 
         } else
 
@@ -280,6 +280,7 @@ const DocumentPage = () => {
             return (
                 <div className={"document-page-container"}>
                     <div>
+                        <div>{JSON.stringify(document)}</div>
                         {/*<TextField label={'Документ'} text={number}/>*/}
                         {/*<TextField label={'Автономер'} text={document?.autoNumber}/>*/}
                         {/*<TextField label={'Серийный номер'} text={document?.serialNumber}/>*/}
