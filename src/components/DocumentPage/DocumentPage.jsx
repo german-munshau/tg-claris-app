@@ -4,7 +4,7 @@ import {useTelegram} from "../../hooks/useTelegram";
 import TextField from "../TextField/TextField";
 // import AgreementHistory from "../AgreementHistory/AgreementHistory";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
-import DocumentPositions from "../DocumentPositions/DocumentPositions";
+// import DocumentPositions from "../DocumentPositions/DocumentPositions";
 import './document-page.css'
 
 //
