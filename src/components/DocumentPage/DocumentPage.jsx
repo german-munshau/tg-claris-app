@@ -264,40 +264,18 @@ const DocumentPage = () => {
     }
 
     const renderData = (document) => {
-
-
         if (!!document) {
             return (
-                <div className={"center document-not-found"}>Нет документа</div>
+                <div className={"center document-not-found"}>Необходима авторизация /start</div>
             )
-
-            // } else if (document.message) {
-            //     return (
-            //         <div className={"center document-not-found"}>{document.message}</div>
-            //     )
-
-        } else
-
-        if (Object.keys(document).length === 0) {
+        } else if (Object.keys(document).length === 0) {
             return (
                 <div className={"center document-not-found"}>Не найден</div>
             )
-
-            // } else if (document.message) {
-            //     return (
-            //         <div className={"center document-not-found"}>{document.message}</div>
-            //     )
-
         } else
-
-
             return (
                 <div className={"document-page-container"}>
                     <div>
-                        <div>{JSON.stringify(document)}</div>
-                        {/*<TextField label={'Документ'} text={number}/>*/}
-                        {/*<TextField label={'Автономер'} text={document?.autoNumber}/>*/}
-                        {/*<TextField label={'Серийный номер'} text={document?.serialNumber}/>*/}
                         <TextField label={'Категория'} text={document?.category?.name}/>
                         <TextField label={'Компания'} text={document?.company?.name}/>
                         <TextField label={'Автор'} text={document?.author?.name}/>
