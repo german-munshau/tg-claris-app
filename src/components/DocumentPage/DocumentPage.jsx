@@ -4,7 +4,7 @@ import {useTelegram} from "../../hooks/useTelegram";
 import TextField from "../TextField/TextField";
 // import AgreementHistory from "../AgreementHistory/AgreementHistory";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
-// import DocumentPositions from "../DocumentPositions/DocumentPositions";
+import DocumentPositions from "../DocumentPositions/DocumentPositions";
 import './document-page.css'
 
 //
@@ -212,7 +212,7 @@ const DocumentPage = () => {
     let {id} = useParams()
 
     const [document, setDocument] = useState(null)
-    // const [positions, setPositions] = useState([])
+    const [positions, setPositions] = useState([])
     // const [agreementHistory, setAgreementHistory] = useState([])
     const [loading, setLoading] = useState(false)
 
@@ -228,9 +228,9 @@ const DocumentPage = () => {
                 setDocument(docJson)
 
                 //загрузка позиций документа
-                // const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${id}${search}`)
-                // const docPositionsJson = await docPositions.json()
-                // setPositions(docPositionsJson)
+                const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${id}${search}`)
+                const docPositionsJson = await docPositions.json()
+                setPositions(docPositionsJson)
 
                 // //загрузка истории согласования
                 // const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${id}${search}`)
@@ -283,7 +283,7 @@ const DocumentPage = () => {
                         <TextField label={'Статус документа'} text={document?.state?.name}/>
                         <TextField label={'Статус согласования'} text={document?.agreementState?.name}/>
                     </div>
-                    {/*<DocumentPositions data={positions}/>*/}
+                    <DocumentPositions data={positions}/>
                     {/*<AgreementHistory data={agreementHistory}/>*/}
                     <ButtonPanel agree={onAgreeHandle} disagree={onDisagreeHandle}/>
                 </div>
