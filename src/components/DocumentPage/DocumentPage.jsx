@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import {useTelegram} from "../../hooks/useTelegram";
 import TextField from "../TextField/TextField";
 // import AgreementHistory from "../AgreementHistory/AgreementHistory";
@@ -207,49 +207,43 @@ import './document-page.css'
 
 
 const DocumentPage = () => {
-    const [number, setNumber] = useState(null)
+
+    const location = useLocation();
+    const params = useParams()
+
     const [document, setDocument] = useState(null)
     const [positions, setPositions] = useState([])
     // const [agreementHistory, setAgreementHistory] = useState([])
     const [loading, setLoading] = useState(false)
-    const location = useLocation();
+
     const {onClose} = useTelegram();
-
-    const getDocumentNumber = (path) => {
-        return path.split('/')[2]
-    }
-
-    useEffect(() => {
-        setNumber(getDocumentNumber(location.pathname))
-    }, [location.pathname])
-
 
     useEffect(() => {
         // запрос в бота для получения данных по документу
         (async () => {
-            if (number) {
+            if (params.id) {
                 // загрузка шапки документа
-                const doc = await fetch(`https://tg.gm-cloud.ru/document/${number}`)
+                const doc = await fetch(`https://tg.gm-cloud.ru/document/${params.id}${location.search}`)
                 const docJson = await doc.json()
                 setDocument(docJson)
 
                 //загрузка позиций документа
-                const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${number}`)
+                const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${params.id}${location.search}`)
                 const docPositionsJson = await docPositions.json()
                 setPositions(docPositionsJson)
 
                 // //загрузка истории согласования
-                // const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${number}`)
+                // const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${params.id}${location.search}`)
                 // const docAgreementHistoryJson = await docAgreementHistory.json()
                 // setAgreementHistory(docAgreementHistoryJson)
                 setLoading(true)
             }
         })()
 
-    }, [number])
+    }, [params.id,location.search])
 
     const onAgreeHandle = async () => {
-        await fetch(`https://tg.gm-cloud.ru/document/${number}/agree`, {
+        await fetch(`https://tg.gm-cloud.ru/document/${params.id}/agree`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -259,7 +253,7 @@ const DocumentPage = () => {
         onClose()
     }
     const onDisagreeHandle = async () => {
-        await fetch(`https://tg.gm-cloud.ru/document/${number}/disagree`, {
+        await fetch(`https://tg.gm-cloud.ru/document/${params.id}/disagree`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
