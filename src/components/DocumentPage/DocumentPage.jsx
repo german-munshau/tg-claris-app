@@ -268,7 +268,15 @@ const DocumentPage = () => {
             return (
                 <div className={"center document-not-found"}>Не найден</div>
             )
+
+        } else if (document.message) {
+            return (
+                <div className={"center document-not-found"}>{document.message}</div>
+            )
+
         } else
+
+
             return (
                 <div className={"document-page-container"}>
                     <div>
