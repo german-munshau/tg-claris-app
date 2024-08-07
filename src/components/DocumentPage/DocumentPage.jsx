@@ -212,7 +212,7 @@ const DocumentPage = () => {
     let {id} = useParams()
 
     const [document, setDocument] = useState(null)
-    const [positions, setPositions] = useState([])
+    // const [positions, setPositions] = useState([])
     // const [agreementHistory, setAgreementHistory] = useState([])
     const [loading, setLoading] = useState(false)
 
