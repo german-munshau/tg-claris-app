@@ -208,8 +208,8 @@ import './document-page.css'
 
 const DocumentPage = () => {
 
-    const location = useLocation();
-    const params = useParams()
+    const {search} = useLocation();
+    let {id} = useParams()
 
     const [document, setDocument] = useState(null)
     const [positions, setPositions] = useState([])
@@ -221,29 +221,29 @@ const DocumentPage = () => {
     useEffect(() => {
         // запрос в бота для получения данных по документу
         (async () => {
-            if (params.id) {
+            if (id) {
                 // загрузка шапки документа
-                const doc = await fetch(`https://tg.gm-cloud.ru/document/${params.id}${location.search}`)
+                const doc = await fetch(`https://tg.gm-cloud.ru/document/${id}${search}`)
                 const docJson = await doc.json()
                 setDocument(docJson)
 
                 //загрузка позиций документа
-                const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${params.id}${location.search}`)
-                const docPositionsJson = await docPositions.json()
-                setPositions(docPositionsJson)
+                // const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${id}${search}`)
+                // const docPositionsJson = await docPositions.json()
+                // setPositions(docPositionsJson)
 
                 // //загрузка истории согласования
-                // const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${params.id}${location.search}`)
+                // const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${id}${search}`)
                 // const docAgreementHistoryJson = await docAgreementHistory.json()
                 // setAgreementHistory(docAgreementHistoryJson)
                 setLoading(true)
             }
         })()
 
-    }, [params.id,location.search])
+    }, [id, search])
 
     const onAgreeHandle = async () => {
-        await fetch(`https://tg.gm-cloud.ru/document/${params.id}/agree`, {
+        await fetch(`https://tg.gm-cloud.ru/document/${id}/agree`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -253,7 +253,7 @@ const DocumentPage = () => {
         onClose()
     }
     const onDisagreeHandle = async () => {
-        await fetch(`https://tg.gm-cloud.ru/document/${params.id}/disagree`, {
+        await fetch(`https://tg.gm-cloud.ru/document/${id}/disagree`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
