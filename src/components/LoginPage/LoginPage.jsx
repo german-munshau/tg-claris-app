@@ -9,7 +9,7 @@ const LoginPage = () => {
     const {tg, queryId} = useTelegram()
 
     const onSendData = useCallback(async () => {
-        const data = {login, password, queryId}
+        const data = {login, password, queryId, tg}
          let response =
             await fetch('https://tg.gm-cloud.ru/auth', {
             method: 'POST',
