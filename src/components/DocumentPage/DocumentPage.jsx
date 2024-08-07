@@ -293,34 +293,6 @@ const DocumentPage = () => {
             )
     }
 
-    // const renderData = (document) => {
-    //     if (!!document) {
-    //         return (
-    //             <div className={"center document-not-found"}>Необходима авторизация /start</div>
-    //         )
-    //     } else if (Object.keys(document).length === 0) {
-    //         return (
-    //             <div className={"center document-not-found"}>Не найден</div>
-    //         )
-    //     } else
-    //         return (
-    //             <div className={"document-page-container"}>
-    //                 <div>
-    //                     <TextField label={'Категория'} text={document?.category?.name}/>
-    //                     <TextField label={'Компания'} text={document?.company?.name}/>
-    //                     <TextField label={'Автор'} text={document?.author?.name}/>
-    //                     <TextField label={'Ответственный'} text={document?.responsible?.name}/>
-    //                     <TextField label={'Содержание'} text={document?.content}/>
-    //                     <TextField label={'Статус документа'} text={document?.state?.name}/>
-    //                     <TextField label={'Статус согласования'} text={document?.agreementState?.name}/>
-    //                 </div>
-    //                 <DocumentPositions data={positions}/>
-    //                 {/*<AgreementHistory data={agreementHistory}/>*/}
-    //                 <ButtonPanel agree={onAgreeHandle} disagree={onDisagreeHandle}/>
-    //             </div>
-    //         )
-    // }
-
     return (
         <>
             {loading ? renderData(document) : <div className="center loader"></div>}
