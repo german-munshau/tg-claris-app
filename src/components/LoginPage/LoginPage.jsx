@@ -10,14 +10,14 @@ const LoginPage = () => {
 
     const onSendData = useCallback(async () => {
         const data = {login, password, queryId, tg}
-         let response =
+        let response =
             await fetch('https://tg.gm-cloud.ru/auth', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
 
         if (response.ok) {
             let json = response.json()
@@ -26,7 +26,7 @@ const LoginPage = () => {
             alert('Error' + response.status)
         }
 
-    }, [login, password, queryId])
+    }, [login, password, queryId, tg])
 
 
     useEffect(() => {
