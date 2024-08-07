@@ -283,7 +283,7 @@ const DocumentPage = () => {
                         <TextField label={'Статус документа'} text={document?.state?.name}/>
                         <TextField label={'Статус согласования'} text={document?.agreementState?.name}/>
                     </div>
-                    <DocumentPositions data={positions}/>
+                    {/*<DocumentPositions data={positions}/>*/}
                     {/*<AgreementHistory data={agreementHistory}/>*/}
                     <ButtonPanel agree={onAgreeHandle} disagree={onDisagreeHandle}/>
                 </div>
