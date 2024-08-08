@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useTelegram} from "../../hooks/useTelegram";
 import TextField from "../TextField/TextField";
-import DocumentPositions from "../DocumentPositions/DocumentPositions";
+// import DocumentPositions from "../DocumentPositions/DocumentPositions";
 import './search-page.css';
 
 const SearchPage = () => {
@@ -9,10 +9,14 @@ const SearchPage = () => {
     const {tg, user} = useTelegram()
     const [number, setNumber] = useState('')
     const [document, setDocument] = useState(null)
-    const [positions, setPositions] = useState([])
+    // const [positions, setPositions] = useState([])
     const [loading, setLoading] = useState(false)
 
     // 1337
+// последняя ошибка
+    //{"message":"Не найдено инфо о пользователе в базе бота, необходима авторизация"}
+
+
     const onSendData = useCallback(async () => {
 
         setLoading(true)
@@ -26,10 +30,10 @@ const SearchPage = () => {
             const docId = doc?.id
 
             //загрузка позиций документа
-            const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${docId}&chat_id=${user.id}`)
-            const docPositionsJson = await docPositions.json()
-
-            setPositions(docPositionsJson)
+            // const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${docId}&chat_id=${user.id}`)
+            // const docPositionsJson = await docPositions.json()
+            //
+            // setPositions(docPositionsJson)
             setDocument(doc)
         }
 
@@ -83,7 +87,7 @@ const SearchPage = () => {
                         <TextField label={'Статус документа'} text={document?.state?.name}/>
                         <TextField label={'Статус согласования'} text={document?.agreementState?.name}/>
                     </div>
-                    <DocumentPositions data={positions}/>
+                    {/*<DocumentPositions data={positions}/>*/}
                 </div>
             )
     }
@@ -107,7 +111,7 @@ const SearchPage = () => {
             {!loading && document && renderData(document)}
 
             {JSON.stringify(document)}
-            {JSON.stringify(positions)}
+            {/*{JSON.stringify(positions)}*/}
         </>
     )
 };
