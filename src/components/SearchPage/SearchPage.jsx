@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useTelegram} from "../../hooks/useTelegram";
 import TextField from "../TextField/TextField";
-// import DocumentPositions from "../DocumentPositions/DocumentPositions";
+import DocumentPositions from "../DocumentPositions/DocumentPositions";
 import './search-page.css';
 
 const SearchPage = () => {
@@ -9,24 +9,32 @@ const SearchPage = () => {
     const {tg, user} = useTelegram()
     const [number, setNumber] = useState('')
     const [document, setDocument] = useState(null)
-    // const [positions, setPositions] = useState([])
+    const [positions, setPositions] = useState([])
     const [loading, setLoading] = useState(false)
 
     // 1337
     const onSendData = useCallback(async () => {
 
         setLoading(true)
+        // загрузка документа
+        const docs = await fetch(`https://tg.gm-cloud.ru/documents?autonumber=${number}&chat_id=${user.id}`)
+        let docsJson = await docs.json()
 
-        let response = await fetch(`https://tg.gm-cloud.ru/documents?autonumber=${number}&chat_id=${user.id}`)
-        if (response.ok) {
-            let json = await response.json()
-            setDocument(json[0])
+        // если есть положительный результат
+        if (docsJson.length > 0) {
+            const doc = docs[0]
+            const docId = doc?.id
 
-            // загрузка деталей
+            //загрузка позиций документа
+            const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${docId}&chat_id=${user.id}`)
+            const docPositionsJson = await docPositions.json()
 
-
-            setLoading(false)
+            setPositions(docPositionsJson)
+            setDocument(doc)
         }
+
+        setLoading(false)
+
     }, [number, user])
 
     useEffect(() => {
@@ -75,7 +83,7 @@ const SearchPage = () => {
                         <TextField label={'Статус документа'} text={document?.state?.name}/>
                         <TextField label={'Статус согласования'} text={document?.agreementState?.name}/>
                     </div>
-                    {/*<DocumentPositions data={positions}/>*/}
+                    <DocumentPositions data={positions}/>
                 </div>
             )
     }
