@@ -4,7 +4,7 @@ import './search-page.css';
 
 const SearchPage = () => {
     const [number, setNumber] = useState('')
-    const {tg, user, queryId} = useTelegram()
+    const {tg, user} = useTelegram()
 
     const onSendData = useCallback(async () => {
         let response =
@@ -19,7 +19,7 @@ const SearchPage = () => {
             alert('Error' + response.status)
         }
 
-    }, [number, queryId, user])
+    }, [number, user])
 
 
     useEffect(() => {
