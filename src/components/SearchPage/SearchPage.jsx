@@ -17,15 +17,15 @@ const SearchPage = () => {
             )
 // 1337
         if (response.ok) {
-             let json = await response.json()
-            navigate('/show/'+json.id)
+            let json = await response.json()
+            navigate('/show/' + json.id)
 
 //            alert(json)
         } else {
             alert('Error' + response.status)
         }
 
-    }, [number, user])
+    }, [number, user, navigate])
 
 
     useEffect(() => {
