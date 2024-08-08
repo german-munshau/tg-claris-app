@@ -9,7 +9,7 @@ const SearchPage = () => {
     const onSendData = useCallback(async () => {
 
         let response =
-            await fetch(`https://tg.gm-cloud.ru/documents?autoNumber=${number}&chatId=${user.id}`, {
+            await fetch(`https://tg.gm-cloud.ru/documents?autonumber=${number}&chat_id=${user.id}`, {
                 method: 'GET', headers: {'Content-Type': 'application/json'},
             })
 // 1337
