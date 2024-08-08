@@ -105,6 +105,9 @@ const SearchPage = () => {
             {loading && <div className="center loader"></div>}
 
             {!loading && document && renderData(document)}
+
+            {JSON.stringify(document)}
+            {JSON.stringify(positions)}
         </>
     )
 };
