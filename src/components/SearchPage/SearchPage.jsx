@@ -43,12 +43,12 @@ const SearchPage = () => {
     }, [tg.MainButton])
 
     useEffect(() => {
-        if (!number || !document) {
+        if (!number || document) {
             tg.MainButton.hide()
         } else {
             tg.MainButton.show()
         }
-    }, [number, tg.MainButton])
+    }, [number, tg.MainButton, document])
 
     const onChangeNumber = (e) => {
         setNumber(e.target.value)
