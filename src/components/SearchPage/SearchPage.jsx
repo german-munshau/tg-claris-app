@@ -50,7 +50,7 @@ const SearchPage = () => {
     return (
         <>
             {document ?
-                <div>document.id</div>
+                <div>{JSON.stringify(document)}</div>
 
                 :
                 <div className={'form'}>
