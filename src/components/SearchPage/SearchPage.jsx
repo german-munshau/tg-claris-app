@@ -14,7 +14,7 @@ const SearchPage = () => {
             })
 // 1337
         if (response.ok) {
-            let json = response.json()
+            let json = await response.json()
             alert(json)
         } else {
             alert('Error' + response.status)
