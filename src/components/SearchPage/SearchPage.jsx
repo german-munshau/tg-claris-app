@@ -1,24 +1,33 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useTelegram} from "../../hooks/useTelegram";
+import TextField from "../TextField/TextField";
+// import DocumentPositions from "../DocumentPositions/DocumentPositions";
 import './search-page.css';
 
 const SearchPage = () => {
-    const [number, setNumber] = useState('')
-    const [document, setDocument] = useState()
-    const {tg, user} = useTelegram()
 
+    const {tg, user} = useTelegram()
+    const [number, setNumber] = useState('')
+    const [document, setDocument] = useState(null)
+    // const [positions, setPositions] = useState([])
+    const [loading, setLoading] = useState(false)
+
+    // 1337
     const onSendData = useCallback(async () => {
+
+        setLoading(true)
+
         let response = await fetch(`https://tg.gm-cloud.ru/documents?autonumber=${number}&chat_id=${user.id}`)
-// 1337
         if (response.ok) {
             let json = await response.json()
             setDocument(json[0])
-        } else {
-            alert('Error' + response.status)
+
+            // загрузка деталей
+
+
+            setLoading(false)
         }
-
     }, [number, user])
-
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
@@ -27,32 +36,53 @@ const SearchPage = () => {
         }
     }, [onSendData, tg])
 
-
     useEffect(() => {
         tg.MainButton.setParams({
             text: 'Поиск'
         })
     }, [tg.MainButton])
 
-    const onChangeNumber = (e) => {
-        setNumber(e.target.value)
-    }
-
     useEffect(() => {
-        if (!number) {
+        if (!number || !document) {
             tg.MainButton.hide()
         } else {
             tg.MainButton.show()
         }
     }, [number, tg.MainButton])
 
+    const onChangeNumber = (e) => {
+        setNumber(e.target.value)
+    }
+
+    const renderData = (document) => {
+        if (Object.keys(document).length === 0) {
+            return (
+                <div className={"center document-not-found"}>Не найден</div>
+            )
+        } else if (document.message) {
+            return (
+                <div className={"center document-not-found"}>Необходима авторизация /start</div>
+            )
+        } else
+            return (
+                <div className={"document-page-container"}>
+                    <div>
+                        <TextField label={'Категория'} text={document?.category?.name}/>
+                        <TextField label={'Компания'} text={document?.company?.name}/>
+                        <TextField label={'Автор'} text={document?.author?.name}/>
+                        <TextField label={'Ответственный'} text={document?.responsible?.name}/>
+                        <TextField label={'Содержание'} text={document?.content}/>
+                        <TextField label={'Статус документа'} text={document?.state?.name}/>
+                        <TextField label={'Статус согласования'} text={document?.agreementState?.name}/>
+                    </div>
+                    {/*<DocumentPositions data={positions}/>*/}
+                </div>
+            )
+    }
 
     return (
         <>
-            {document ?
-                <div>{JSON.stringify(document)}</div>
-
-                :
+            {!loading && !document &&
                 <div className={'form'}>
                     <h3>Поиск</h3>
                     <input className={'input'}
@@ -62,8 +92,11 @@ const SearchPage = () => {
                            onChange={onChangeNumber}
                     />
                 </div>
-
             }
+
+            {loading && <div className="center loader"></div>}
+
+            {!loading && document && renderData(document)}
         </>
     )
 };
