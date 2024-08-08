@@ -1,21 +1,26 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useTelegram} from "../../hooks/useTelegram";
 import './search-page.css';
+import {useNavigate} from "react-router-dom";
 
 const SearchPage = () => {
     const [number, setNumber] = useState('')
     const {tg, user} = useTelegram()
 
+    const navigate = useNavigate();
+
     const onSendData = useCallback(async () => {
 
         let response =
-            await fetch(`https://tg.gm-cloud.ru/documents?autonumber=${number}&chat_id=${user.id}`, {
-                method: 'GET', headers: {'Content-Type': 'application/json'},
-            })
+            await fetch(`https://tg.gm-cloud.ru/documents?autonumber=${number}&chat_id=${user.id}`
+                // , {                method: 'GET', headers: {'Content-Type': 'application/json'},            }
+            )
 // 1337
         if (response.ok) {
-            let json = await response.json()
-            alert(json)
+             let json = await response.json()
+            navigate('/show/'+json.id)
+
+//            alert(json)
         } else {
             alert('Error' + response.status)
         }
