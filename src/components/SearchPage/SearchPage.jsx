@@ -7,11 +7,12 @@ const SearchPage = () => {
     const {tg, user} = useTelegram()
 
     const onSendData = useCallback(async () => {
+
         let response =
-            await fetch(`https://tg.gm-cloud.ru/documents/${number}?chat_id=${user.id}`, {
+            await fetch(`https://tg.gm-cloud.ru/documents?autoNumber=${number}&chatId=${user.id}`, {
                 method: 'GET', headers: {'Content-Type': 'application/json'},
             })
-
+// 1337
         if (response.ok) {
             let json = response.json()
             alert(json)
