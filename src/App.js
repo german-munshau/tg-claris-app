@@ -2,6 +2,7 @@ import {Route, Routes} from "react-router-dom";
 import MainPage from "./components/MainPage/MainPage";
 import LoginPage from "./components/LoginPage/LoginPage";
 import DocumentPage from "./components/DocumentPage/DocumentPage";
+import SearchPage from "./components/SearchPage/SearchPage";
 import './App.css';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
             <Routes>
                 <Route index element={<MainPage/>}/>
                 <Route path={'/login'} element={<LoginPage/>}/>
+                <Route path={'/search'} element={<SearchPage/>}/>
                 <Route path={'/show/:id'} element={<DocumentPage/>}/>
             </Routes>
         </div>
