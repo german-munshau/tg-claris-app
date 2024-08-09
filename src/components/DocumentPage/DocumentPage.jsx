@@ -218,16 +218,13 @@ const DocumentPage = () => {
 
     const {onClose} = useTelegram();
 
-
-    console.log(id,search)
-
     useEffect(() => {
         // запрос в бота для получения данных по документу
         (async () => {
             if (id) {
                 setLoading(true)
                 // загрузка шапки документа
-                const doc = await fetch(`https://tg.gm-cloud.ru/document/${id}${search}`)
+                const doc = await fetch(`https://tg.gm-cloud.ru/documents/${id}${search}`)
                 const docJson = await doc.json()
                 setDocument(docJson)
 
