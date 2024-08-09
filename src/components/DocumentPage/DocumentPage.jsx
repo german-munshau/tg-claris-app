@@ -1,10 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation, useParams} from "react-router-dom";
 import {useTelegram} from "../../hooks/useTelegram";
-// import TextField from "../TextField/TextField";
-// import AgreementHistory from "../AgreementHistory/AgreementHistory";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
-// import DocumentPositions from "../DocumentPositions/DocumentPositions";
 import DocumentView from "../DocumentView/DocumentView";
 import './document-page.css'
 
@@ -208,10 +205,8 @@ import './document-page.css'
 
 
 const DocumentPage = () => {
-
     const {search} = useLocation();
     let {id} = useParams()
-
     const [document, setDocument] = useState(null)
     const [positions, setPositions] = useState([])
     const [agreementHistory, setAgreementHistory] = useState([])
@@ -269,9 +264,7 @@ const DocumentPage = () => {
         onClose()
     }
 
-
     const renderData = (document) => {
-
         if (Object.keys(document).length === 0) {
             return (
                 <div className={"center document-not-found"}>Не найден</div>
@@ -283,26 +276,11 @@ const DocumentPage = () => {
         } else
             return (
                 <div className={"document-page-container"}>
-                    {/*<div>*/}
-                    {/*    <TextField label={'Содержание'} text={document?.content}/>*/}
-                    {/*    <TextField label={'Дата'} text={document?.addedDate}/>*/}
-                    {/*    <TextField label={'№'} text={document?.serialNumber}/>*/}
-                    {/*    <TextField label={'Тип'} text={document?.category?.name}/>*/}
-                    {/*    <TextField label={'Проект'} text={document?.project?.name}/>*/}
-                    {/*    <TextField label={'Сумма'} text={document?.amount}/>*/}
-                    {/*    <TextField label={'Автор'} text={document?.author?.name}/>*/}
-                    {/*</div>*/}
-                    {/*<DocumentPositions data={positions}/>*/}
-                    {/*<AgreementHistory data={agreementHistory}/>*/}
-
                     <DocumentView
                         document={document}
                         positions={positions}
                         agreementHistory={agreementHistory}
                     />
-
-
-
                     <ButtonPanel agree={onAgreeHandle} disagree={onDisagreeHandle}/>
                 </div>
             )
