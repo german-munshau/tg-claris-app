@@ -3,7 +3,6 @@ import {useTelegram} from "../../hooks/useTelegram";
 import './login-page.css';
 
 const LoginPage = () => {
-
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     const {tg, user, queryId} = useTelegram()
@@ -28,14 +27,12 @@ const LoginPage = () => {
 
     }, [login, password, queryId, user])
 
-
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
         return () => {
             tg.offEvent('mainButtonClicked', onSendData)
         }
     }, [onSendData, tg])
-
 
     useEffect(() => {
         tg.MainButton.setParams({

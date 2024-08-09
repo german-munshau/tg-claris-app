@@ -4,7 +4,7 @@ import './document-positions.css'
 
 const DocumentPositions = ({data}) => {
     return (<>
-            <div className={'document-details-title'}>История согласования:</div>
+            <div className={'document-details-title'}>Позиции:</div>
             <div className={'document-position-container'}>
                 {data.length > 0 &&
                     <table>
