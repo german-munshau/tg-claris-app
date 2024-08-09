@@ -17,7 +17,7 @@ const SearchPage = () => {
     const onSendData = useCallback(async () => {
         setLoading(true)
         // загрузка документа
-        const docs = await fetch(`https://tg.gm-cloud.ru/documents?autonumber=${number}&chat_id=${user.id}`)
+        const docs = await fetch(`https://tg.gm-cloud.ru/documents?serialNumber=${number}&chat_id=${user.id}`)
         let docsJson = await docs.json()
 
         // если есть положительный результат
