@@ -11,10 +11,10 @@ thead {
     top: 0;
 }
 
-tbody {
-    overflow-y: scroll;
-    height: 300px;
-}
+/*tbody {*/
+/*    overflow-y: scroll;*/
+/*    height: 300px;*/
+/*}*/
 
 td, th {
     padding: 5px;
