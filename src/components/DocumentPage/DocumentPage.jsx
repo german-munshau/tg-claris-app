@@ -218,9 +218,9 @@ const DocumentPage = () => {
 
     const {onClose} = useTelegram();
 
-
-    console.log(id,search)
-    console.log(`https://tg.gm-cloud.ru/documents/${id}${search}`)
+    //
+    // console.log(id, search)
+    // console.log(`https://tg.gm-cloud.ru/documents/${id}${search}`)
 
 
     useEffect(() => {
@@ -231,12 +231,14 @@ const DocumentPage = () => {
                 // загрузка шапки документа
                 const doc = await fetch(`https://tg.gm-cloud.ru/documents/${id}${search}`)
                 const docJson = await doc.json()
-                setDocument(docJson)
+
 
                 //загрузка позиций документа
                 const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${id}${search}`)
                 const docPositionsJson = await docPositions.json()
+
                 setPositions(docPositionsJson)
+                setDocument(docJson)
 
                 // //загрузка истории согласования
                 // const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${id}${search}`)
@@ -302,7 +304,10 @@ const DocumentPage = () => {
     return (
         <>
             {/*{loading ? renderData(document) : <div className="center loader"></div>}*/}
-            {!loading ? renderData(document) : <div className="center loader"></div>}
+            {/*{!loading ? renderData(document) : <div className="center loader"></div>}*/}
+            {loading && <div className="center loader"></div>}
+            {document && renderData(document)}
+
         </>
     );
 };
