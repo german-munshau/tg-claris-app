@@ -2,27 +2,16 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {useTelegram} from "../../hooks/useTelegram";
 import TextField from "../TextField/TextField";
 import DocumentPositions from "../DocumentPositions/DocumentPositions";
+import AgreementHistory from "../AgreementHistory/AgreementHistory";
 import './search-page.css';
 
 const SearchPage = () => {
-
-    /*
-    * Для вывода инфо по документу:
-Содержание: Description
-Дата: Dobavleno10630559000
-№: Nomer4412114752000
-Тип: Tip_dokumenta1780224000
-Проект: Proekt1986884000
-Сумма: Summa24222190000
-Автор: DocumentAuthor
-2. Показать позиции (как в чеке. Название, кол-во, цена, сумма)
-3. Историю согласования*/
-
 
     const {tg, user} = useTelegram()
     const [number, setNumber] = useState('')
     const [document, setDocument] = useState(null)
     const [positions, setPositions] = useState([])
+    const [agreementHistory, setAgreementHistory] = useState([])
     const [loading, setLoading] = useState(false)
 
     const onSendData = useCallback(async () => {
@@ -40,6 +29,11 @@ const SearchPage = () => {
             const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${docId}?chat_id=${user.id}`)
             const docPositionsJson = await docPositions.json()
 
+            // //загрузка истории согласования
+            const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${docId}?chat_id=${user.id}`)
+            const docAgreementHistoryJson = await docAgreementHistory.json()
+
+            setAgreementHistory(docAgreementHistoryJson)
             setPositions(docPositionsJson)
             setDocument(doc)
         }
@@ -93,6 +87,7 @@ const SearchPage = () => {
                         <TextField label={'Автор'} text={document?.author?.name}/>
                     </div>
                     <DocumentPositions data={positions}/>
+                    <AgreementHistory data={agreementHistory}/>
                 </div>
             )
     }
