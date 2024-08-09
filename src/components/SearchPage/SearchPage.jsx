@@ -30,7 +30,7 @@ const SearchPage = () => {
             const docId = doc?.id
 
             //загрузка позиций документа
-            const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${docId}&chat_id=${user.id}`)
+            const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${docId}?chat_id=${user.id}`)
             const docPositionsJson = await docPositions.json()
 
             setPositions(docPositionsJson)
