@@ -84,13 +84,13 @@ const SearchPage = () => {
             return (
                 <div className={"document-page-container"}>
                     <div>
-                        <TextField label={'Содержание:'} text={document?.content}/>
-                        <TextField label={'Дата:'} text={document?.addedDate}/>
-                        <TextField label={'№:'} text={document?.serialNumber}/>
-                        <TextField label={'Тип:'} text={document?.category?.name}/>
-                        <TextField label={'Проект:'} text={document?.project?.name}/>
-                        <TextField label={'Сумма:'} text={document?.amount}/>
-                        <TextField label={'Автор:'} text={document?.author?.name}/>
+                        <TextField label={'Содержание'} text={document?.content}/>
+                        <TextField label={'Дата'} text={document?.addedDate}/>
+                        <TextField label={'№'} text={document?.serialNumber}/>
+                        <TextField label={'Тип'} text={document?.category?.name}/>
+                        <TextField label={'Проект'} text={document?.project?.name}/>
+                        <TextField label={'Сумма'} text={document?.amount}/>
+                        <TextField label={'Автор'} text={document?.author?.name}/>
                     </div>
                     <DocumentPositions data={positions}/>
                 </div>

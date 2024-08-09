@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useLocation, useParams} from "react-router-dom";
 import {useTelegram} from "../../hooks/useTelegram";
 import TextField from "../TextField/TextField";
-// import AgreementHistory from "../AgreementHistory/AgreementHistory";
+import AgreementHistory from "../AgreementHistory/AgreementHistory";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
 import DocumentPositions from "../DocumentPositions/DocumentPositions";
 import './document-page.css'
@@ -213,15 +213,10 @@ const DocumentPage = () => {
 
     const [document, setDocument] = useState(null)
     const [positions, setPositions] = useState([])
-    // const [agreementHistory, setAgreementHistory] = useState([])
+    const [agreementHistory, setAgreementHistory] = useState([])
     const [loading, setLoading] = useState(false)
 
     const {onClose} = useTelegram();
-
-    //
-    // console.log(id, search)
-    // console.log(`https://tg.gm-cloud.ru/documents/${id}${search}`)
-
 
     useEffect(() => {
         // запрос в бота для получения данных по документу
@@ -237,13 +232,15 @@ const DocumentPage = () => {
                 const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${id}${search}`)
                 const docPositionsJson = await docPositions.json()
 
+
+                // //загрузка истории согласования
+                const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${id}${search}`)
+                const docAgreementHistoryJson = await docAgreementHistory.json()
+
+                setAgreementHistory(docAgreementHistoryJson)
                 setPositions(docPositionsJson)
                 setDocument(docJson)
 
-                // //загрузка истории согласования
-                // const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${id}${search}`)
-                // const docAgreementHistoryJson = await docAgreementHistory.json()
-                // setAgreementHistory(docAgreementHistoryJson)
                 setLoading(false)
             }
         })()
@@ -286,17 +283,16 @@ const DocumentPage = () => {
             return (
                 <div className={"document-page-container"}>
                     <div>
-                        <TextField label={'Содержание:'} text={document?.content}/>
-                        <TextField label={'Дата:'} text={document?.addedDate}/>
-                        <TextField label={'№:'} text={document?.serialNumber}/>
-                        <TextField label={'Тип:'} text={document?.category?.name}/>
-                        <TextField label={'Проект:'} text={document?.project?.name}/>
-                        <TextField label={'Сумма:'} text={document?.amount}/>
-                        <TextField label={'Автор:'} text={document?.author?.name}/>
-
+                        <TextField label={'Содержание'} text={document?.content}/>
+                        <TextField label={'Дата'} text={document?.addedDate}/>
+                        <TextField label={'№'} text={document?.serialNumber}/>
+                        <TextField label={'Тип'} text={document?.category?.name}/>
+                        <TextField label={'Проект'} text={document?.project?.name}/>
+                        <TextField label={'Сумма'} text={document?.amount}/>
+                        <TextField label={'Автор'} text={document?.author?.name}/>
                     </div>
                     <DocumentPositions data={positions}/>
-                    {/*<AgreementHistory data={agreementHistory}/>*/}
+                    <AgreementHistory data={agreementHistory}/>
                     <ButtonPanel agree={onAgreeHandle} disagree={onDisagreeHandle}/>
                 </div>
             )
@@ -304,11 +300,8 @@ const DocumentPage = () => {
 
     return (
         <>
-            {/*{loading ? renderData(document) : <div className="center loader"></div>}*/}
-            {/*{!loading ? renderData(document) : <div className="center loader"></div>}*/}
             {loading && <div className="center loader"></div>}
             {document && renderData(document)}
-
         </>
     );
 };
