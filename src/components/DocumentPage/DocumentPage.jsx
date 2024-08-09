@@ -6,6 +6,7 @@ import AgreementHistory from "../AgreementHistory/AgreementHistory";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
 import DocumentPositions from "../DocumentPositions/DocumentPositions";
 import './document-page.css'
+import DocumentView from "../DocumentView/DocumentView";
 
 //
 // const document = {
@@ -282,17 +283,26 @@ const DocumentPage = () => {
         } else
             return (
                 <div className={"document-page-container"}>
-                    <div>
-                        <TextField label={'Содержание'} text={document?.content}/>
-                        <TextField label={'Дата'} text={document?.addedDate}/>
-                        <TextField label={'№'} text={document?.serialNumber}/>
-                        <TextField label={'Тип'} text={document?.category?.name}/>
-                        <TextField label={'Проект'} text={document?.project?.name}/>
-                        <TextField label={'Сумма'} text={document?.amount}/>
-                        <TextField label={'Автор'} text={document?.author?.name}/>
-                    </div>
-                    <DocumentPositions data={positions}/>
-                    <AgreementHistory data={agreementHistory}/>
+                    {/*<div>*/}
+                    {/*    <TextField label={'Содержание'} text={document?.content}/>*/}
+                    {/*    <TextField label={'Дата'} text={document?.addedDate}/>*/}
+                    {/*    <TextField label={'№'} text={document?.serialNumber}/>*/}
+                    {/*    <TextField label={'Тип'} text={document?.category?.name}/>*/}
+                    {/*    <TextField label={'Проект'} text={document?.project?.name}/>*/}
+                    {/*    <TextField label={'Сумма'} text={document?.amount}/>*/}
+                    {/*    <TextField label={'Автор'} text={document?.author?.name}/>*/}
+                    {/*</div>*/}
+                    {/*<DocumentPositions data={positions}/>*/}
+                    {/*<AgreementHistory data={agreementHistory}/>*/}
+
+                    <DocumentView
+                        document={document}
+                        positions={positions}
+                        agreementHistory={agreementHistory}
+                    />
+
+
+
                     <ButtonPanel agree={onAgreeHandle} disagree={onDisagreeHandle}/>
                 </div>
             )
