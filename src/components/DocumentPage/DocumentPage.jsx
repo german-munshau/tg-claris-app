@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation, useParams} from "react-router-dom";
 import {useTelegram} from "../../hooks/useTelegram";
-import TextField from "../TextField/TextField";
-import AgreementHistory from "../AgreementHistory/AgreementHistory";
+// import TextField from "../TextField/TextField";
+// import AgreementHistory from "../AgreementHistory/AgreementHistory";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
-import DocumentPositions from "../DocumentPositions/DocumentPositions";
-import './document-page.css'
+// import DocumentPositions from "../DocumentPositions/DocumentPositions";
 import DocumentView from "../DocumentView/DocumentView";
+import './document-page.css'
 
 //
 // const document = {

@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useTelegram} from "../../hooks/useTelegram";
-import TextField from "../TextField/TextField";
-import DocumentPositions from "../DocumentPositions/DocumentPositions";
-import AgreementHistory from "../AgreementHistory/AgreementHistory";
-import './search-page.css';
+// import TextField from "../TextField/TextField";
+// import DocumentPositions from "../DocumentPositions/DocumentPositions";
+// import AgreementHistory from "../AgreementHistory/AgreementHistory";
 import DocumentView from "../DocumentView/DocumentView";
+import './search-page.css';
 
 const SearchPage = () => {
 
