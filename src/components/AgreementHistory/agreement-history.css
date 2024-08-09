@@ -5,7 +5,7 @@ table {
 
 td, th {
     font-family: monospace;
-    padding: 5px;
+    /*padding: 5px;*/
 }
 
 .document-details-container {
