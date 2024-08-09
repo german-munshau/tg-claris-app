@@ -26,7 +26,7 @@ const SearchPage = () => {
 
         // если есть положительный результат
         if (docsJson.length > 0) {
-            const doc = docs[0]
+            const doc = docsJson[0]
             // const docId = doc?.id
 
             //загрузка позиций документа
