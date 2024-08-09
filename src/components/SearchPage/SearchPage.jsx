@@ -6,6 +6,19 @@ import './search-page.css';
 
 const SearchPage = () => {
 
+    /*
+    * Для вывода инфо по документу:
+Содержание: Description
+Дата: Dobavleno10630559000
+№: Nomer4412114752000
+Тип: Tip_dokumenta1780224000
+Проект: Proekt1986884000
+Сумма: Summa24222190000
+Автор: DocumentAuthor
+2. Показать позиции (как в чеке. Название, кол-во, цена, сумма)
+3. Историю согласования*/
+
+
     const {tg, user} = useTelegram()
     const [number, setNumber] = useState('')
     const [document, setDocument] = useState(null)

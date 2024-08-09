@@ -218,10 +218,14 @@ const DocumentPage = () => {
 
     const {onClose} = useTelegram();
 
+
+    console.log(id,search)
+
     useEffect(() => {
         // запрос в бота для получения данных по документу
         (async () => {
             if (id) {
+                setLoading(true)
                 // загрузка шапки документа
                 const doc = await fetch(`https://tg.gm-cloud.ru/document/${id}${search}`)
                 const docJson = await doc.json()
@@ -236,7 +240,7 @@ const DocumentPage = () => {
                 // const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${id}${search}`)
                 // const docAgreementHistoryJson = await docAgreementHistory.json()
                 // setAgreementHistory(docAgreementHistoryJson)
-                setLoading(true)
+                setLoading(false)
             }
         })()
 
@@ -295,7 +299,8 @@ const DocumentPage = () => {
 
     return (
         <>
-            {loading ? renderData(document) : <div className="center loader"></div>}
+            {/*{loading ? renderData(document) : <div className="center loader"></div>}*/}
+            {!loading ? renderData(document) : <div className="center loader"></div>}
         </>
     );
 };
