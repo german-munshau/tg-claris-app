@@ -2,7 +2,6 @@ table {
     width: 100%;
     font-family: monospace;
     padding: 2px;
-    border: var(--tg-theme-bg-color);
 }
 
 thead {
@@ -12,15 +11,8 @@ thead {
     top: 0;
 }
 
-/*tbody {*/
-/*    overflow-y: scroll;*/
-/*    height: 300px;*/
-/*}*/
-
-td, th, td {
+td, th {
     padding: 5px;
-    border: var(--tg-theme-text-color);
-
 }
 
 .document-position-name {
@@ -42,6 +34,3 @@ td, th, td {
     font-size: 17px;
 }
 
-.document-position-container {
-    /*padding-top: 10px;*/
-}
