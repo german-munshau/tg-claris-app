@@ -218,6 +218,11 @@ const DocumentPage = () => {
 
     const {onClose} = useTelegram();
 
+
+    console.log(id,search)
+    console.log(`https://tg.gm-cloud.ru/documents/${id}${search}`)
+
+
     useEffect(() => {
         // запрос в бота для получения данных по документу
         (async () => {
