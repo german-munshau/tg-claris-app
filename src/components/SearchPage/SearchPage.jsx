@@ -12,13 +12,7 @@ const SearchPage = () => {
     const [positions, setPositions] = useState([])
     const [loading, setLoading] = useState(false)
 
-    // 1337
-// последняя ошибка
-    //{"message":"Не найдено инфо о пользователе в базе бота, необходима авторизация"}
-
-
     const onSendData = useCallback(async () => {
-
         setLoading(true)
         // загрузка документа
         const docs = await fetch(`https://tg.gm-cloud.ru/documents?autonumber=${number}&chat_id=${user.id}`)
@@ -36,9 +30,7 @@ const SearchPage = () => {
             setPositions(docPositionsJson)
             setDocument(doc)
         }
-
         setLoading(false)
-
     }, [number, user])
 
     useEffect(() => {
@@ -105,13 +97,10 @@ const SearchPage = () => {
                     />
                 </div>
             }
-
             {loading && <div className="center loader"></div>}
-
             {!loading && document && renderData(document)}
-
-            {JSON.stringify(document?.id)}
-            {JSON.stringify(positions)}
+            {/*{JSON.stringify(document?.id)}*/}
+            {/*{JSON.stringify(positions)}*/}
         </>
     )
 };
