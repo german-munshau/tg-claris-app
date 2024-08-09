@@ -13,8 +13,7 @@ td, th {
 
 .document-details-container {
     width: 100%;
-    /*padding: 10px;*/
-    padding: 5px 10px 10px 10px;
+    padding: 5px 10px 10px 0;
     max-height: 62vh;
     overflow-y: auto;
 }
@@ -22,6 +21,5 @@ td, th {
 .document-details-title {
     padding: 10px 0 0 10px;
     font-family: monospace;
-    font-size: medium;
-    font-weight: bold;
+    font-size: large;
 }
