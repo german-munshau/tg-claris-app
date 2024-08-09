@@ -17,7 +17,7 @@ thead {
 /*    height: 300px;*/
 /*}*/
 
-td, th {
+td, th, td {
     padding: 5px;
     border: var(--tg-theme-text-color);
 
