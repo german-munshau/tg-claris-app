@@ -11,7 +11,7 @@ const DocumentPositions = ({data}) => {
                         <thead>
                         <tr>
                             <th className={'document-position-name'}>ТМЦ текстом</th>
-                            <th className={'document-position-digit'}>Кол-во</th>
+                            <th className={'document-position-digit'}>Кол</th>
                             <th className={'document-position-digit'}>Цена</th>
                             <th className={'document-position-digit'}>Сумма</th>
                         </tr>

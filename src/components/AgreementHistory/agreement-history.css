@@ -13,13 +13,14 @@ td, th {
 
 .document-details-container {
     width: 100%;
-    padding: 10px;
+    /*padding: 10px;*/
+    padding: 5px 10px 10px 10px;
     max-height: 62vh;
     overflow-y: auto;
 }
 
 .document-details-title {
-    padding: 10px 0 0 5px;
+    padding: 10px 0 0 10px;
     font-family: monospace;
     font-size: medium;
     font-weight: bold;
