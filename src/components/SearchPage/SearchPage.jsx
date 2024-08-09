@@ -110,7 +110,7 @@ const SearchPage = () => {
 
             {!loading && document && renderData(document)}
 
-            {JSON.stringify(document)}
+            {JSON.stringify(document?.id)}
             {JSON.stringify(positions)}
         </>
     )
