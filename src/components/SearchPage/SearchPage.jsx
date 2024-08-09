@@ -27,7 +27,7 @@ const SearchPage = () => {
         // если есть положительный результат
         if (docsJson.length > 0) {
             const doc = docs[0]
-            const docId = doc?.id
+            // const docId = doc?.id
 
             //загрузка позиций документа
             // const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${docId}&chat_id=${user.id}`)
