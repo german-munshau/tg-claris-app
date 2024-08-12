@@ -17,23 +17,26 @@ const SearchPage = () => {
         const docs = await fetch(`https://tg.gm-cloud.ru/documents?serialNumber=${number}&chat_id=${user.id}`)
         let docsJson = await docs.json()
 
-        // если есть положительный результат
-        if (docsJson.length > 0) {
-            const doc = docsJson[0]
-            const docId = doc?.id
+        if (docs.status === 200) {
+            // если есть положительный результат
+            if (docsJson.length > 0) {
+                const doc = docsJson[0]
+                const docId = doc?.id
 
-            //загрузка позиций документа
-            const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${docId}?chat_id=${user.id}`)
-            const docPositionsJson = await docPositions.json()
+                //загрузка позиций документа
+                const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${docId}?chat_id=${user.id}`)
+                const docPositionsJson = await docPositions.json()
 
-            // //загрузка истории согласования
-            const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${docId}?chat_id=${user.id}`)
-            const docAgreementHistoryJson = await docAgreementHistory.json()
+                // //загрузка истории согласования
+                const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${docId}?chat_id=${user.id}`)
+                const docAgreementHistoryJson = await docAgreementHistory.json()
 
-            setAgreementHistory(docAgreementHistoryJson)
-            setPositions(docPositionsJson)
-            setDocument(doc)
+                setAgreementHistory(docAgreementHistoryJson)
+                setPositions(docPositionsJson)
+                setDocument(doc)
+            }
         }
+
         setLoading(false)
     }, [number, user])
 
