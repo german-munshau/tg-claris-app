@@ -21,10 +21,3 @@ const Document = ({data}) => {
 };
 
 export default Document;
-
-
-{/*
-            .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-
-            */
-}
