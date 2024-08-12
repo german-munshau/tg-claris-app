@@ -244,7 +244,7 @@ const DocumentPage = () => {
     }, [id, search])
 
     const onAgreeHandle = async () => {
-        await fetch(`https://tg.gm-cloud.ru/document/${id}/agree`, {
+        await fetch(`https://tg.gm-cloud.ru/documents/${id}/agree`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -254,7 +254,7 @@ const DocumentPage = () => {
         onClose()
     }
     const onDisagreeHandle = async () => {
-        await fetch(`https://tg.gm-cloud.ru/document/${id}/disagree`, {
+        await fetch(`https://tg.gm-cloud.ru/documents/${id}/disagree`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
