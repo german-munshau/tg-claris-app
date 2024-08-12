@@ -19,8 +19,8 @@ const DocumentPositions = ({data}) => {
                         <tr key={item.id}>
                             <td className={'document-position-name'}>{item.assetText}</td>
                             <td className={'document-position-digit'}>{item.positionsCount}</td>
-                            <td className={'document-position-digit'}>{item.price}</td>
-                            <td className={'document-position-digit'}>{item.amount}</td>
+                            <td className={'document-position-digit'}>{item.price.toLocaleString()}</td>
+                            <td className={'document-position-digit'}>{item.amount.toLocaleString()}</td>
                         </tr>
                     ))}
                     </tbody>
