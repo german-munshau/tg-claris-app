@@ -12,10 +12,19 @@ const Document = ({data}) => {
             <TextField label={'Тип'} text={data?.category?.name}/>
             <TextField label={'Проект'} text={data?.project?.name}/>
             {/*<TextField label={'Сумма'} text={data?.amount.toFixed(2).toLocaleString()}/>*/}
-            <TextField label={'Сумма'} text={data?.amount.toFixed(2)}/>
+            <TextField label={'Сумма'} text={data?.amount
+                .toFixed(2)
+                .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}/>
             <TextField label={'Автор'} text={data?.author?.name}/>
         </div>
     );
 };
 
 export default Document;
+
+
+{/*
+            .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
+            */
+}
