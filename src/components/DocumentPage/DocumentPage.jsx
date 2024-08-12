@@ -223,18 +223,18 @@ const DocumentPage = () => {
                 const doc = await fetch(`https://tg.gm-cloud.ru/documents/${id}${search}`)
                 const docJson = await doc.json()
 
+                if (doc.status === 200) {
+                    //загрузка позиций документа
+                    const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${id}${search}`)
+                    const docPositionsJson = await docPositions.json()
 
-                //загрузка позиций документа
-                const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${id}${search}`)
-                const docPositionsJson = await docPositions.json()
+                    // //загрузка истории согласования
+                    const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${id}${search}`)
+                    const docAgreementHistoryJson = await docAgreementHistory.json()
 
-
-                // //загрузка истории согласования
-                const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${id}${search}`)
-                const docAgreementHistoryJson = await docAgreementHistory.json()
-
-                setAgreementHistory(docAgreementHistoryJson)
-                setPositions(docPositionsJson)
+                    setAgreementHistory(docAgreementHistoryJson)
+                    setPositions(docPositionsJson)
+                }
                 setDocument(docJson)
 
                 setLoading(false)
