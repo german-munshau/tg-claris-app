@@ -1,4 +1,4 @@
-export const getDate = (str) => {
+export const getDateTime = (str) => {
     const options = {
         // era: 'long',
         year: 'numeric',
@@ -16,7 +16,7 @@ export const getDate = (str) => {
     return date.toLocaleString("ru", options)
 }
 
-export const getDateTime = (str) => {
+export const getDate = (str) => {
     const options = {
         year: 'numeric',
         month: 'long',
