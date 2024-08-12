@@ -11,7 +11,8 @@ const Document = ({data}) => {
             <TextField label={'№'} text={data?.serialNumber}/>
             <TextField label={'Тип'} text={data?.category?.name}/>
             <TextField label={'Проект'} text={data?.project?.name}/>
-            <TextField label={'Сумма'} text={data?.amount.toFixed(2).toLocaleString()}/>
+            {/*<TextField label={'Сумма'} text={data?.amount.toFixed(2).toLocaleString()}/>*/}
+            <TextField label={'Сумма'} text={data?.amount.toFixed(2)}/>
             <TextField label={'Автор'} text={data?.author?.name}/>
         </div>
     );
