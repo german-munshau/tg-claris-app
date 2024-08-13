@@ -268,15 +268,31 @@ const DocumentPage = () => {
     }
 
     const onDisagreeHandle = async () => {
-        await fetch(`https://tg.gm-cloud.ru/documents/${id}/disagree`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({comment: 'telegram disagree', chatId})
-        })
-        onClose()
+        try {
+            await fetch(`https://tg.gm-cloud.ru/documents/${id}/disagree`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({comment: 'telegram disagree', chatId})
+            })
+        } catch (e) {
+            console.log(e)
+        }
+        finally {
+            onClose()
+        }
     }
+    // const onDisagreeHandle = async () => {
+    //     await fetch(`https://tg.gm-cloud.ru/documents/${id}/disagree`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({comment: 'telegram disagree', chatId})
+    //     })
+    //     onClose()
+    // }
 
     const renderData = (document) => {
         if (Object.keys(document).length === 0) {
