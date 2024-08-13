@@ -251,6 +251,7 @@ const DocumentPage = () => {
     }, [id, chatId])
 
     const onAgreeHandle = async () => {
+        onClose()
         await fetch(`https://tg.gm-cloud.ru/documents/${id}/agree`, {
             method: 'POST',
             headers: {
@@ -258,20 +259,18 @@ const DocumentPage = () => {
             },
             body: JSON.stringify({comment: 'telegram agree', chatId})
         })
-            .catch(e => console.log(e))
-            .finally(() => onClose())
     }
 
     const onDisagreeHandle = async () => {
+        onClose()
         await fetch(`https://tg.gm-cloud.ru/documents/${id}/disagree`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({comment: 'telegram disagree', chatId})
-        }).catch(e => console.log(e))
-            .finally(() => onClose())
 
+        })
     }
     // const onDisagreeHandle = async () => {
     //     await fetch(`https://tg.gm-cloud.ru/documents/${id}/disagree`, {
