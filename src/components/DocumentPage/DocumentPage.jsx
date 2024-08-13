@@ -4,6 +4,7 @@ import {useTelegram} from "../../hooks/useTelegram";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
 import DocumentView from "../DocumentView/DocumentView";
 import './document-page.css'
+import * as querystring from "querystring";
 
 //
 // const document = {
@@ -211,8 +212,13 @@ const DocumentPage = () => {
     const [positions, setPositions] = useState([])
     const [agreementHistory, setAgreementHistory] = useState([])
     const [loading, setLoading] = useState(false)
+    const [chatId, setChatId] = useState()
 
     const {onClose} = useTelegram();
+
+    useEffect(() => {
+        setChatId(querystring.parse.search)
+    }, [search])
 
     useEffect(() => {
         // запрос в бота для получения данных по документу
@@ -249,7 +255,7 @@ const DocumentPage = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({comment: 'telegram agree'})
+            body: JSON.stringify({comment: 'telegram agree', chatId})
         })
         onClose()
     }
