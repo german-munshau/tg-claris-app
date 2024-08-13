@@ -3,8 +3,9 @@ import {useLocation, useParams} from "react-router-dom";
 import {useTelegram} from "../../hooks/useTelegram";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
 import DocumentView from "../DocumentView/DocumentView";
+import querystring from "querystring";
 import './document-page.css'
-import * as querystring from "querystring";
+
 
 //
 // const document = {
