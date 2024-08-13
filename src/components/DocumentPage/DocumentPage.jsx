@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation, useParams} from "react-router-dom";
+import {useLocation, useParams, useSearchParams} from "react-router-dom";
 import {useTelegram} from "../../hooks/useTelegram";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
 import DocumentView from "../DocumentView/DocumentView";
-import queryString from "querystring";
 import './document-page.css'
 
 
@@ -208,18 +207,20 @@ import './document-page.css'
 
 const DocumentPage = () => {
     const {search} = useLocation();
+    let [searchParams] = useSearchParams();
     let {id} = useParams()
     const [document, setDocument] = useState(null)
     const [positions, setPositions] = useState([])
     const [agreementHistory, setAgreementHistory] = useState([])
     const [loading, setLoading] = useState(false)
-    const [chatId, setChatId] = useState()
+    const [chatId, setChatId] = useState(null)
 
     const {onClose} = useTelegram();
 
     useEffect(() => {
-        setChatId(queryString.parse.search)
-    }, [search])
+        const id = searchParams.get('chat_id')
+        setChatId(id)
+    }, [searchParams])
 
     useEffect(() => {
         // запрос в бота для получения данных по документу
@@ -228,15 +229,18 @@ const DocumentPage = () => {
                 setLoading(true)
                 // загрузка шапки документа
                 const doc = await fetch(`https://tg.gm-cloud.ru/documents/${id}${search}`)
+                // const doc = await fetch(`https://tg.gm-cloud.ru/documents/${id}?chat_id=${chatId}`)
                 const docJson = await doc.json()
 
                 if (doc.status === 200) {
                     //загрузка позиций документа
                     const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${id}${search}`)
+                    // const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${id}?chat_id=${chatId}`)
                     const docPositionsJson = await docPositions.json()
 
                     // //загрузка истории согласования
                     const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${id}${search}`)
+                    // const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${id}?chat_id=${chatId}`)
                     const docAgreementHistoryJson = await docAgreementHistory.json()
 
                     setAgreementHistory(docAgreementHistoryJson)
@@ -257,6 +261,7 @@ const DocumentPage = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({comment: 'telegram agree', chatId})
+            // body: JSON.stringify({comment: 'telegram agree'})
         })
         onClose()
     }
@@ -266,7 +271,7 @@ const DocumentPage = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({comment: 'telegram disagree'})
+            body: JSON.stringify({comment: 'telegram disagree', chatId})
         })
         onClose()
     }
