@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-// import {useLocation, useParams, useSearchParams} from "react-router-dom";
 import {useParams, useSearchParams} from "react-router-dom";
 import {useTelegram} from "../../hooks/useTelegram";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
@@ -207,7 +206,6 @@ import './document-page.css'
 //
 
 const DocumentPage = () => {
-    // const {search} = useLocation();
     let {id} = useParams()
     let [searchParams] = useSearchParams();
     const [document, setDocument] = useState(null)
@@ -229,18 +227,15 @@ const DocumentPage = () => {
             if (id && chatId) {
                 setLoading(true)
                 // загрузка шапки документа
-                // const doc = await fetch(`https://tg.gm-cloud.ru/documents/${id}${search}`)
                 const doc = await fetch(`https://tg.gm-cloud.ru/documents/${id}?chat_id=${chatId}`)
                 const docJson = await doc.json()
 
                 if (doc.status === 200) {
                     //загрузка позиций документа
-                    // const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${id}${search}`)
                     const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${id}?chat_id=${chatId}`)
                     const docPositionsJson = await docPositions.json()
 
                     // //загрузка истории согласования
-                    // const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${id}${search}`)
                     const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${id}?chat_id=${chatId}`)
                     const docAgreementHistoryJson = await docAgreementHistory.json()
 
