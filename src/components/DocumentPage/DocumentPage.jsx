@@ -3,7 +3,7 @@ import {useLocation, useParams} from "react-router-dom";
 import {useTelegram} from "../../hooks/useTelegram";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
 import DocumentView from "../DocumentView/DocumentView";
-import querystring from "querystring";
+import queryString from "querystring";
 import './document-page.css'
 
 
@@ -218,7 +218,7 @@ const DocumentPage = () => {
     const {onClose} = useTelegram();
 
     useEffect(() => {
-        setChatId(querystring.parse.search)
+        setChatId(queryString.parse.search)
     }, [search])
 
     useEffect(() => {
