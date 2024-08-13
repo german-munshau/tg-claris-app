@@ -264,11 +264,9 @@ const DocumentPage = () => {
             .catch((err) => {
                 console.log(err)
             })
-            .finally(()=>{
-                console.log('finnaly')
+            .finally(() => {
                 onClose()
             })
-
     }
 
     const onDisagreeHandle = async () => {
@@ -279,18 +277,16 @@ const DocumentPage = () => {
             },
             body: JSON.stringify({comment: 'telegram disagree', chatId})
         })
-        onClose()
+            .then((data) => {
+                console.log(data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+            .finally(() => {
+                onClose()
+            })
     }
-    // const onDisagreeHandle = async () => {
-    //     await fetch(`https://tg.gm-cloud.ru/documents/${id}/disagree`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({comment: 'telegram disagree', chatId})
-    //     })
-    //     onClose()
-    // }
 
     const renderData = (document) => {
         if (Object.keys(document).length === 0) {
