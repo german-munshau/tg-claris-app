@@ -1,3 +1,5 @@
+import React from "react";
+
 export const getDateTime = (str) => {
     const options = {
         // era: 'long',
@@ -27,3 +29,7 @@ export const getDate = (str) => {
     const date = new Date(timestamp);
     return date.toLocaleString("ru", options)
 }
+
+export const getCurrency = (currency) => {
+    return currency.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+};

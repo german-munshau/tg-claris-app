@@ -1,5 +1,7 @@
 import React from 'react';
+import {getCurrency} from "../../utils/utils";
 import './document-positions.css'
+
 
 const DocumentPositions = ({data}) => {
     return (<>
@@ -19,9 +21,8 @@ const DocumentPositions = ({data}) => {
                         <tr key={item.id}>
                             <td className={'document-position-name'}>{item.assetText}</td>
                             <td className={'document-position-digit'}>{item.positionsCount}</td>
-                            <td className={'document-position-digit'}>{item.price.toFixed(2)}</td>
-                            <td className={'document-position-digit'}>{item.amount.toFixed(2)}</td>
-                            {/*<td className={'document-position-digit'}>{item.amountWithNDS.toFixed(2)}</td>*/}
+                            <td className={'document-position-digit'}>{getCurrency(item.price)}</td>
+                            <td className={'document-position-digit'}>{getCurrency(item.amount)}</td>
                         </tr>
                     ))}
                     </tbody>

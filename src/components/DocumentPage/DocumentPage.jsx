@@ -5,7 +5,6 @@ import ButtonPanel from "../ButtonPanel/ButtonPanel";
 import DocumentView from "../DocumentView/DocumentView";
 import './document-page.css'
 
-
 //
 // const document = {
 //     number: 123456,

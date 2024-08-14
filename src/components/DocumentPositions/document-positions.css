@@ -13,6 +13,7 @@ thead {
 
 td, th {
     padding: 5px;
+    font-weight: 500;
 }
 
 .document-position-name {

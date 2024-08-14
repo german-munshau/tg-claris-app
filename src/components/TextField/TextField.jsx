@@ -1,10 +1,10 @@
 import React from 'react';
 import "./text-field.css"
 
-const TextField = ({label, text}) => {
+const TextField = ({label, text, className}) => {
     return (
         <div className={'text-field'}>
-            <b>{label}:</b> <span>{text}</span>
+            {label}: <span className={className}>{text}</span>
         </div>
     );
 };

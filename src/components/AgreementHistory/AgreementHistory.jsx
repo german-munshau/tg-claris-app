@@ -8,9 +8,9 @@ const AgreementHistory = ({data}) => {
         <>
             <div className={'document-details-title'}>История согласования:</div>
             <div className={'document-details-container'}>
-                <table>
+                <div>
                     {data.map((item, idx) => (<AgreementHistoryItem key={idx} item={item}/>))}
-                </table>
+                </div>
             </div>
         </>
     );

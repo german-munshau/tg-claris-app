@@ -4,14 +4,12 @@ import './agreementhistory-item.css'
 
 const AgreementHistoryItem = ({item}) => {
     return (
-        <tr className={'document-item'}>
-            <td>
-                <div><b>Дата: </b> {item.date && getDateTime(item.date)}</div>
-                <div><b>Виза: </b>{item?.author?.name}</div>
-                <div><b>Решение: </b>{item.agreed}</div>
-                <div><b>Комментарий: </b>{item.comment}</div>
-            </td>
-        </tr>
+        <div className={'document-item'} key={item.id}>
+            <div>Дата: {item.date && getDateTime(item.date)}</div>
+            <div>Виза: {item?.author?.name}</div>
+            <div>Решение: {item.agreed}</div>
+            <div>Комментарий: {item.comment}</div>
+        </div>
     );
 };
 
