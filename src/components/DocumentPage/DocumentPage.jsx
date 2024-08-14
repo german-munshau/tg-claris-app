@@ -213,7 +213,11 @@ const DocumentPage = () => {
     const [loading, setLoading] = useState(false)
     const [chatId, setChatId] = useState(null)
 
-    const {onClose} = useTelegram();
+    const {onClose, tg} = useTelegram();
+
+
+    console.log('TG',tg)
+
 
     useEffect(() => {
         const id = searchParams.get('chat_id')
