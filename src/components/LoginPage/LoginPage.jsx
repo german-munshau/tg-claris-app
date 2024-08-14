@@ -8,7 +8,7 @@ const LoginPage = () => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     const {tg, user, queryId} = useTelegram()
-    const [messageId, setMessageId] = useState()
+    const [messageId, setMessageId] = useState(null)
 
     useEffect(() => {
         const id = searchParams.get('messageId')
