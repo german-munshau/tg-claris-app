@@ -1,7 +1,6 @@
 import React from 'react';
 import TextField from "../TextField/TextField";
 import {getCurrency, getDate} from "../../utils/utils";
-import './document.css'
 
 const Document = ({data}) => {
     return (
