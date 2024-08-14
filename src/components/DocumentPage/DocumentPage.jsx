@@ -213,7 +213,7 @@ const DocumentPage = () => {
     const [loading, setLoading] = useState(false)
     const [chatId, setChatId] = useState(null)
 
-    const {onClose} = useTelegram();
+    const {onClose, tg} = useTelegram();
 
     useEffect(() => {
         const id = searchParams.get('chat_id')
@@ -231,7 +231,7 @@ const DocumentPage = () => {
 
                 if (doc.status === 200) {
                     //загрузка позиций документа
-                    const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${id}?chat_id=${chatId}`)
+                    const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${id}?chat_id=${chatId}&tg=${JSON.stringify(tg)}`)
                     const docPositionsJson = await docPositions.json()
 
                     // //загрузка истории согласования
@@ -247,7 +247,7 @@ const DocumentPage = () => {
             }
         })()
 
-    }, [id, chatId])
+    }, [id, chatId, tg])
 
     const onAgreeHandle = async () => {
         await fetch(`https://tg.gm-cloud.ru/documents/${id}/agree`, {
