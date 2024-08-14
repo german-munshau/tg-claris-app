@@ -1,14 +1,23 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useTelegram} from "../../hooks/useTelegram";
+import {useSearchParams} from "react-router-dom";
 import './login-page.css';
 
 const LoginPage = () => {
+    let [searchParams] = useSearchParams();
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     const {tg, user, queryId} = useTelegram()
+    const [messageId, setMessageId] = useState()
+
+    useEffect(() => {
+        const id = searchParams.get('messageId')
+        setMessageId(id)
+    }, [searchParams])
+
 
     const onSendData = useCallback(async () => {
-        const data = {login, password, queryId, chatId: user.id}
+        const data = {login, password, queryId, chatId: user.id, messageId}
         let response =
             await fetch('https://tg.gm-cloud.ru/auth', {
                 method: 'POST',
