@@ -34,7 +34,7 @@ const LoginPage = () => {
             alert('Error' + response.status)
         }
 
-    }, [login, password, queryId, user])
+    }, [login, password, queryId, user, messageId])
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
