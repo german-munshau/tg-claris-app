@@ -1,5 +1,3 @@
-import React from "react";
-
 export const getDateTime = (str) => {
     const options = {
         // era: 'long',
