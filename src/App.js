@@ -1,8 +1,8 @@
 import {Route, Routes} from "react-router-dom";
-import MainPage from "./components/MainPage/MainPage";
-import LoginPage from "./components/LoginPage/LoginPage";
-import DocumentPage from "./components/DocumentPage/DocumentPage";
-import SearchPage from "./components/SearchPage/SearchPage";
+import MainPage from "./pages/MainPage/MainPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import DocumentPage from "./pages/DocumentPage/DocumentPage";
+import SearchPage from "./pages/SearchPage/SearchPage";
 import './App.css';
 
 function App() {

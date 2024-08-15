@@ -1,7 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useTelegram} from "../../hooks/useTelegram";
-import DocumentView from "../DocumentView/DocumentView";
+import DocumentView from "../../components/DocumentView/DocumentView";
+import {BOT_SERVER_URL} from "../../config";
 import './search-page.css';
+
 
 const SearchPage = () => {
     const {tg, user} = useTelegram()
@@ -14,7 +16,7 @@ const SearchPage = () => {
     const onSendData = useCallback(async () => {
         setLoading(true)
         // загрузка документа
-        const docs = await fetch(`https://tg.gm-cloud.ru/documents?serialNumber=${number}&chat_id=${user.id}`)
+        const docs = await fetch(`${BOT_SERVER_URL}/documents?serialNumber=${number}&chat_id=${user.id}`)
         let docsJson = await docs.json()
 
         if (docs.status === 200) {
@@ -24,11 +26,11 @@ const SearchPage = () => {
                 const docId = doc?.id
 
                 //загрузка позиций документа
-                const docPositions = await fetch(`https://tg.gm-cloud.ru/documentPositions/${docId}?chat_id=${user.id}`)
+                const docPositions = await fetch(`${BOT_SERVER_URL}/documentPositions/${docId}?chat_id=${user.id}`)
                 const docPositionsJson = await docPositions.json()
 
                 // //загрузка истории согласования
-                const docAgreementHistory = await fetch(`https://tg.gm-cloud.ru/agreementHistory/${docId}?chat_id=${user.id}`)
+                const docAgreementHistory = await fetch(`${BOT_SERVER_URL}/agreementHistory/${docId}?chat_id=${user.id}`)
                 const docAgreementHistoryJson = await docAgreementHistory.json()
 
                 setAgreementHistory(docAgreementHistoryJson)

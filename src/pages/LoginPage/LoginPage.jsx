@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {useTelegram} from "../../hooks/useTelegram";
 import {useSearchParams} from "react-router-dom";
+import {useTelegram} from "../../hooks/useTelegram";
+import {BOT_SERVER_URL} from "../../config";
 import './login-page.css';
 
 const LoginPage = () => {
@@ -19,7 +20,7 @@ const LoginPage = () => {
     const onSendData = useCallback(async () => {
         const data = {login, password, queryId, chatId: user.id, messageId}
         let response =
-            await fetch('https://tg.gm-cloud.ru/auth', {
+            await fetch(`${BOT_SERVER_URL}/auth`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
