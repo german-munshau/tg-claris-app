@@ -212,12 +212,15 @@ const DocumentPage = () => {
     const [agreementHistory, setAgreementHistory] = useState([])
     const [loading, setLoading] = useState(false)
     const [chatId, setChatId] = useState(null)
+    const [messageId, setMessageId] = useState(null)
 
     const {onClose} = useTelegram();
 
     useEffect(() => {
-        const id = searchParams.get('chat_id')
-        setChatId(id)
+        const chat_id = searchParams.get('chat_id')
+        const message_id = searchParams.get('message_id')
+        setChatId(chat_id)
+        setMessageId(message_id)
     }, [searchParams])
 
     useEffect(() => {
@@ -255,7 +258,7 @@ const DocumentPage = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({comment: 'telegram agree', chatId})
+            body: JSON.stringify({comment: 'telegram agree', chatId, messageId})
         })
             .then((data) => {
                 console.log(data)
@@ -274,7 +277,7 @@ const DocumentPage = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({comment: 'telegram disagree', chatId})
+            body: JSON.stringify({comment: 'telegram disagree', chatId, messageId})
         })
             .then((data) => {
                 console.log(data)
