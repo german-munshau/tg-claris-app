@@ -258,7 +258,10 @@ const DocumentPage = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({comment: 'telegram agree', chatId, messageId})
+            body: JSON.stringify({
+                comment: 'telegram agree', chatId, messageId,
+                number: document.serialNumber
+            })
         })
             .then((data) => {
                 console.log(data)
@@ -277,7 +280,10 @@ const DocumentPage = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({comment: 'telegram disagree', chatId, messageId})
+            body: JSON.stringify({
+                comment: 'telegram disagree', chatId, messageId,
+                number: document.serialNumber
+            })
         })
             .then((data) => {
                 console.log(data)
