@@ -19,7 +19,6 @@ const LoginPage = () => {
 
     const onSendData = useCallback(async () => {
         const data = {login, password, queryId, chatId: user.id, messageId}
-        let response =
             await fetch(`${BOT_SERVER_URL}/auth`, {
                 method: 'POST',
                 headers: {
@@ -27,14 +26,6 @@ const LoginPage = () => {
                 },
                 body: JSON.stringify(data)
             })
-
-        if (response.ok) {
-            let json = response.json()
-            alert(json)
-        } else {
-            alert('Error' + response.status)
-        }
-
     }, [login, password, queryId, user, messageId])
 
     useEffect(() => {

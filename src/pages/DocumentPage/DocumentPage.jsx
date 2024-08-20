@@ -8,8 +8,9 @@ import './document-page.css'
 
 
 const DocumentPage = () => {
-    let {id} = useParams()
-    let [searchParams] = useSearchParams();
+    const {tg, onClose} = useTelegram()
+    const {id} = useParams()
+    const [searchParams] = useSearchParams();
     const navigate = useNavigate()
     const [document, setDocument] = useState(null)
     const [positions, setPositions] = useState([])
@@ -18,8 +19,6 @@ const DocumentPage = () => {
     const [chatId, setChatId] = useState(null)
     const [messageId, setMessageId] = useState(null)
     const [error, setError] = useState(null)
-
-    const {onClose} = useTelegram();
 
     useEffect(() => {
         const chat_id = searchParams.get('chat_id')
@@ -58,56 +57,66 @@ const DocumentPage = () => {
                 } catch (e) {
                     setError({status: e.status, message: e.errorMessage})
                 }
-
                 setLoading(false)
             }
         })()
 
     }, [id, chatId])
 
-    const onAgreeHandle = async () => {
-        await fetch(`${BOT_SERVER_URL}/documents/${id}/agree`, {
+    const options = (number, comment) => {
+        return {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                comment: 'согласовано', chatId, messageId,
-                number: document.serialNumber
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({comment, chatId, messageId, number})
+        }
+    }
+
+    const onAgreeHandle = async () => {
+        const response = await fetch(`${BOT_SERVER_URL}/documents/${id}/agree`, options(document.serialNumber, 'Согласовано'))
+        if (response.status !== 200) {
+            const data = await response.json()
+            tg.showPopup({
+                title: 'Согласование',
+                message: data.message,
             })
-        })
-            .then((data) => {
-                console.log(data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-            .finally(() => {
-                onClose()
-            })
+        }
+        onClose()
     }
 
     const onDisagreeHandle = async () => {
-        await fetch(`${BOT_SERVER_URL}/documents/${id}/disagree`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                comment: 'отклонено', chatId, messageId,
-                number: document.serialNumber
+        const response = await fetch(`${BOT_SERVER_URL}/documents/${id}/disagree`, options(document.serialNumber, 'Отклонено'))
+        if (response.status !== 200) {
+            const data = await response.json()
+            tg.showPopup({
+                title: 'Отклонение',
+                message: data.message,
             })
-        })
-            .then((data) => {
-                console.log(data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-            .finally(() => {
-                onClose()
-            })
+        }
+        onClose()
     }
+
+
+    // const onDisagreeHandle = async () => {
+    //     await fetch(`${BOT_SERVER_URL}/documents/${id}/disagree`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             comment: 'отклонено', chatId, messageId,
+    //             number: document.serialNumber
+    //         })
+    //     })
+    //         .then((data) => {
+    //             console.log(data)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    //         .finally(() => {
+    //             onClose()
+    //         })
+    // }
 
     const renderData = (document) => {
         return (
@@ -125,32 +134,6 @@ const DocumentPage = () => {
         )
     }
 
-    // const renderData = (document) => {
-    //     if (Object.keys(document).length === 0) {
-    //         return (
-    //             <div className={"center document-not-found"}>Не найден</div>
-    //         )
-    //     } else if (document.message) {
-    //         return (
-    //             <div className={"center document-not-found"}>Необходима авторизация /start</div>
-    //         )
-    //     } else
-    //         return (
-    //             <div className={"document-page-container"}>
-    //                 <DocumentView
-    //                     document={document}
-    //                     positions={positions}
-    //                     agreementHistory={agreementHistory}
-    //                 />
-    //                 <div className={'button-container'}>
-    //                     <Button onClick={onAgreeHandle} label={"Согласовать"} className={"btn-agree"}/>
-    //                     <Button onClick={onDisagreeHandle} label={"Отклонить"} className={"btn-disagree"}/>
-    //                 </div>
-    //
-    //             </div>
-    //         )
-    // }
-
     const renderError = (error) => {
         if (error.status === 403) {
             return (<div className={"auth-container"}>
@@ -160,14 +143,13 @@ const DocumentPage = () => {
             )
         }
         return (
-            <div className={"center document-not-found"}>{error.message}</div>
+            <div className={"center document-not-found"}>{error.status}:{error.message}</div>
         )
     }
 
     return (
         <>
             {loading && <div className="center loader"></div>}
-            {/*{document && renderData(document)}*/}
             {!loading && document && !error && renderData(document)}
             {error && renderError(error)}
         </>
