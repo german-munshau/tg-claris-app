@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {useSearchParams} from "react-router-dom";
 import {useTelegram} from "../../hooks/useTelegram";
 import {BOT_SERVER_URL} from "../../config";
-import './login-page.css';
+
 
 const LoginPage = () => {
     let [searchParams] = useSearchParams();
@@ -68,17 +68,17 @@ const LoginPage = () => {
 
     return (<div className={'form'}>
             <h3>Вход в систему</h3>
-            <input className={'input'}
-                   type={'text'}
-                   placeholder={'Логин'}
-                   value={login}
-                   onChange={onChangeLogin}
+            <input
+                type={'text'}
+                placeholder={'Логин'}
+                value={login}
+                onChange={onChangeLogin}
             />
-            <input className={'input'}
-                   type={'password'}
-                   placeholder={'Пароль'}
-                   value={password}
-                   onChange={onChangePassword}
+            <input
+                type={'password'}
+                placeholder={'Пароль'}
+                value={password}
+                onChange={onChangePassword}
             />
         </div>
     )

@@ -1,8 +1,10 @@
 import React, {useCallback, useEffect, useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import {useTelegram} from "../../hooks/useTelegram";
 import DocumentView from "../../components/DocumentView/DocumentView";
 import {BOT_SERVER_URL} from "../../config";
 import './search-page.css';
+import Button from "../../components/Button/Button";
 
 
 const SearchPage = () => {
@@ -12,31 +14,34 @@ const SearchPage = () => {
     const [positions, setPositions] = useState([])
     const [agreementHistory, setAgreementHistory] = useState([])
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
+    const navigate = useNavigate()
 
     const onSendData = useCallback(async () => {
         setLoading(true)
+        setError(null)
         // загрузка документа
-        const docs = await fetch(`${BOT_SERVER_URL}/documents?serialNumber=${number}&chat_id=${user.id}`)
-        let docsJson = await docs.json()
+        try {
+            const response = await fetch(`${BOT_SERVER_URL}/documents?serialNumber=${number}&chat_id=${user.id}`)
+            const data = await response.json()
 
-        if (docs.status === 200) {
-            // если есть положительный результат
-            if (docsJson.length > 0) {
-                const doc = docsJson[0]
-                const docId = doc?.id
-
+            if (response.status === 200) {
                 //загрузка позиций документа
-                const docPositions = await fetch(`${BOT_SERVER_URL}/documentPositions/${docId}?chat_id=${user.id}`)
+                const docPositions = await fetch(`${BOT_SERVER_URL}/documentPositions/${data.id}?chat_id=${user.id}`)
                 const docPositionsJson = await docPositions.json()
 
                 // //загрузка истории согласования
-                const docAgreementHistory = await fetch(`${BOT_SERVER_URL}/agreementHistory/${docId}?chat_id=${user.id}`)
+                const docAgreementHistory = await fetch(`${BOT_SERVER_URL}/agreementHistory/${data.id}?chat_id=${user.id}`)
                 const docAgreementHistoryJson = await docAgreementHistory.json()
 
                 setAgreementHistory(docAgreementHistoryJson)
                 setPositions(docPositionsJson)
-                setDocument(doc)
+                setDocument(data)
+            } else {
+                setError({status: response.status, ...data})
             }
+        } catch (e) {
+            setError({status: e.status, message: e.errorMessage})
         }
 
         setLoading(false)
@@ -67,25 +72,64 @@ const SearchPage = () => {
         setNumber(e.target.value)
     }
 
+    const onKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            onSendLocalData().then()
+        }
+    }
+
+    const onSendLocalData = async () => {
+        setLoading(true)
+        // загрузка документа
+        try {
+            const response = await fetch(`${BOT_SERVER_URL}/documents?serialNumber=${number}&chat_id=311462440`)
+            const data = await response.json()
+            if (response.status === 200) {
+                //загрузка позиций документа
+                const docPositions = await fetch(`${BOT_SERVER_URL}/documentPositions/${data.id}?chat_id=${user.id}`)
+                const docPositionsJson = await docPositions.json()
+
+                // //загрузка истории согласования
+                const docAgreementHistory = await fetch(`${BOT_SERVER_URL}/agreementHistory/${data.id}?chat_id=${user.id}`)
+                const docAgreementHistoryJson = await docAgreementHistory.json()
+
+                setAgreementHistory(docAgreementHistoryJson)
+                setPositions(docPositionsJson)
+                setDocument(data)
+            } else {
+                setError({status: response.status, ...data})
+            }
+        } catch (e) {
+            setError(e)
+        }
+        setLoading(false)
+    }
+
+
     const renderData = (document) => {
-        if (Object.keys(document).length === 0) {
-            return (
-                <div className={"center document-not-found"}>Не найден</div>
-            )
-        } else if (document.message) {
-            return (
-                <div className={"center document-not-found"}>Необходима авторизация /start</div>
-            )
-        } else
-            return (
-                <div className={"document-page-container"}>
-                    <DocumentView
-                        document={document}
-                        positions={positions}
-                        agreementHistory={agreementHistory}
-                    />
+        return (
+            <div className={"document-page-container"}>
+                <DocumentView
+                    document={document}
+                    positions={positions}
+                    agreementHistory={agreementHistory}
+                />
+            </div>
+        )
+    }
+
+    const renderError = (error) => {
+        if (error.status === 403) {
+            return (<div className={"auth-container"}>
+                    <div className={"auth-message"}>{error.message}</div>
+                    <Button label={"Перейти"} onClick={() => navigate('/login')}/>
                 </div>
             )
+        }
+        return (
+            <div className={"center document-not-found"}>{error.message}</div>
+        )
+
     }
 
     return (
@@ -93,16 +137,18 @@ const SearchPage = () => {
             {!loading && !document &&
                 <div className={'form'}>
                     <h3>Поиск</h3>
-                    <input className={'input'}
-                           type={'text'}
-                           placeholder={'Введите номер'}
-                           value={number}
-                           onChange={onChangeNumber}
+                    <input
+                        type={'text'}
+                        placeholder={'Введите номер документа'}
+                        value={number}
+                        onChange={onChangeNumber}
+                        onKeyPress={onKeyPress}
                     />
                 </div>
             }
             {loading && <div className="center loader"></div>}
-            {!loading && document && renderData(document)}
+            {!loading && document && !error && renderData(document)}
+            {error && renderError(error)}
         </>
     )
 };

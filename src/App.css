@@ -1,10 +1,83 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  background: var(--tg-theme-bg-color);
-  color: var(--tg-theme-text-color);
+    background: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background: white;
+    color: black;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+button {
+    border: solid 1px;
+    padding: 8px;
+    min-width: 100px;
+    cursor: pointer;
+    background: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+    border-radius: 5px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-transform: uppercase;
+    margin: 5px;
+}
+
+table {
+    width: 100%;
+    font-family: monospace;
+    padding: 2px;
+}
+
+thead {
+    position: sticky;
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+    top: 0;
+}
+
+td, th {
+    padding: 5px;
+    font-weight: 500;
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+}
+
+.document-page-container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.btn-agree {
+    border-color: green;
+    color: var(--tg-theme-text-color);
+}
+
+.btn-disagree {
+    border-color: red;
+    color: var(--tg-theme-text-color);
+}
+
+.button-container {
+    display: flex;
+    padding: 20px 10px;
+    justify-content: space-around;
+    width: 100%;
 }
