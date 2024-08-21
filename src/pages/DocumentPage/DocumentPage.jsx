@@ -88,9 +88,13 @@ const DocumentPage = () => {
         const response = await fetch(`${BOT_SERVER_URL}/documents/${id}/disagree`, options(document.serialNumber, comment || 'Отклонено'))
         if (response.status !== 200) {
             const data = await response.json()
+            // tg.showPopup({
+            //     title: 'Отклонение',
+            //     message: data.message,
+            // })
             tg.showPopup({
                 title: 'Отклонение',
-                message: data.message,
+                message: JSON.stringify(data),
             })
         }
         onClose()
