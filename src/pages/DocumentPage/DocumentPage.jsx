@@ -19,7 +19,7 @@ const DocumentPage = () => {
     const [chatId, setChatId] = useState(null)
     const [messageId, setMessageId] = useState(null)
     const [error, setError] = useState(null)
-    const [comment, setComment] = useState(null)
+    const [comment, setComment] = useState('')
 
     useEffect(() => {
         const chat_id = searchParams.get('chat_id')
