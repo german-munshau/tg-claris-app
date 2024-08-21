@@ -19,6 +19,7 @@ const DocumentPage = () => {
     const [chatId, setChatId] = useState(null)
     const [messageId, setMessageId] = useState(null)
     const [error, setError] = useState(null)
+    const [comment, setComment] = useState(null)
 
     useEffect(() => {
         const chat_id = searchParams.get('chat_id')
@@ -72,7 +73,7 @@ const DocumentPage = () => {
     }
 
     const onAgreeHandle = async () => {
-        const response = await fetch(`${BOT_SERVER_URL}/documents/${id}/agree`, options(document.serialNumber, 'Согласовано'))
+        const response = await fetch(`${BOT_SERVER_URL}/documents/${id}/agree`, options(document.serialNumber, comment || 'Согласовано'))
         if (response.status !== 200) {
             const data = await response.json()
             tg.showPopup({
@@ -84,7 +85,7 @@ const DocumentPage = () => {
     }
 
     const onDisagreeHandle = async () => {
-        const response = await fetch(`${BOT_SERVER_URL}/documents/${id}/disagree`, options(document.serialNumber, 'Отклонено'))
+        const response = await fetch(`${BOT_SERVER_URL}/documents/${id}/disagree`, options(document.serialNumber, comment || 'Отклонено'))
         if (response.status !== 200) {
             const data = await response.json()
             tg.showPopup({
@@ -96,6 +97,9 @@ const DocumentPage = () => {
     }
 
 
+    const onChangeComment = (e) => {
+        setComment(e.target.value)
+    }
     // const onDisagreeHandle = async () => {
     //     await fetch(`${BOT_SERVER_URL}/documents/${id}/disagree`, {
     //         method: 'POST',
@@ -126,6 +130,15 @@ const DocumentPage = () => {
                     positions={positions}
                     agreementHistory={agreementHistory}
                 />
+                <div className={"comment-container"}>
+                    <input
+                        type={'text'}
+                        placeholder={'Введите комментарий'}
+                        value={comment}
+                        onChange={onChangeComment}
+                    />
+                </div>
+
                 <div className={'button-container'}>
                     <Button onClick={onAgreeHandle} label={"Согласовать"} className={"btn-agree"}/>
                     <Button onClick={onDisagreeHandle} label={"Отклонить"} className={"btn-disagree"}/>
