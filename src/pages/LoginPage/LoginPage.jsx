@@ -41,7 +41,7 @@ const LoginPage = () => {
 
         tg.MainButton.setParams({
             text: 'Вход',
-            is_visible: true,
+//            is_visible: true,
         })
     }, [tg, tg.MainButton])
 
@@ -58,8 +58,7 @@ const LoginPage = () => {
         } else {
             tg.MainButton.enable()
             tg.MainButton.setParams({
-                // color: '#2cab37'
-                color: tg.ThemeParams.button_color
+                color: '#40a7e3'
             })
         }
     }, [login, password, tg.MainButton, tg])
