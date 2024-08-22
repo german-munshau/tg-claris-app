@@ -60,23 +60,25 @@ const SearchPage = () => {
     //     }
     // }, [error, tg])
 
-    useEffect(() => {
-        tg.expand()
-    }, [tg])
+    // useEffect(() => {
+    //     tg.expand()
+    // }, [tg])
 
     useEffect(() => {
+        tg.expand()
+
         tg.MainButton.setParams({
             text: 'Поиск'
         })
     }, [tg.MainButton])
 
     useEffect(() => {
-        if (!number || !document || error?.status === 403) {
+        if (!number) {
             tg.MainButton.hide()
         } else {
             tg.MainButton.show()
         }
-    }, [number, tg.MainButton, document, error?.status])
+    }, [number, tg.MainButton])
 
     const onChangeNumber = (e) => {
         setNumber(e.target.value)
