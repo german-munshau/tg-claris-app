@@ -67,12 +67,12 @@ const SearchPage = () => {
     }, [tg.MainButton])
 
     useEffect(() => {
-        if (!number || document || error.status === 403) {
+        if (!number || document || error?.status === 403) {
             tg.MainButton.hide()
         } else {
             tg.MainButton.show()
         }
-    }, [number, tg.MainButton, document])
+    }, [number, tg.MainButton, document, error?.status])
 
     const onChangeNumber = (e) => {
         setNumber(e.target.value)
