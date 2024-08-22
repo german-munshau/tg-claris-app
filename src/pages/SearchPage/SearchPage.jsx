@@ -157,7 +157,7 @@ const SearchPage = () => {
 
     return (
         <>
-            {!loading && !document && !error &&
+            {!loading && !document &&
                 <div className={'form'}>
                     <h3>Поиск</h3>
                     <input
