@@ -55,7 +55,7 @@ const SearchPage = () => {
     }, [onSendData, tg])
 
     useEffect(() => {
-        if (error) {
+        if (error.status === 403) {
             tg.MainButton.hide()
         }
     }, [error, tg])
