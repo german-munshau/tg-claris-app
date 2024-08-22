@@ -9,7 +9,7 @@ import Button from "../../components/Button/Button";
 
 const SearchPage = () => {
     const {tg, user} = useTelegram()
-    const [number, setNumber] = useState('')
+    const [number, setNumber] = useState(null)
     const [document, setDocument] = useState(null)
     const [positions, setPositions] = useState([])
     const [agreementHistory, setAgreementHistory] = useState([])
