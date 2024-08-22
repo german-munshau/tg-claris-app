@@ -37,7 +37,7 @@ const SearchPage = () => {
                 setPositions(docPositionsJson)
                 setDocument(data)
             } else {
-                setNumber(null)
+                setNumber('')
                 setError({status: response.status, ...data})
             }
         } catch (e) {
@@ -62,7 +62,7 @@ const SearchPage = () => {
     }, [tg, tg.MainButton])
 
     useEffect(() => {
-        if (number === '' || (error && error.status === 401)) {
+        if (number === '' || (error?.status === 401)) {
             tg.MainButton.hide()
         } else {
             tg.MainButton.show()
