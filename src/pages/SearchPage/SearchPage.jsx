@@ -9,7 +9,7 @@ import Button from "../../components/Button/Button";
 
 const SearchPage = () => {
     const {tg, user} = useTelegram()
-    const [number, setNumber] = useState(null)
+    const [number, setNumber] = useState('')
     const [document, setDocument] = useState(null)
     const [positions, setPositions] = useState([])
     const [agreementHistory, setAgreementHistory] = useState([])
@@ -44,7 +44,7 @@ const SearchPage = () => {
                 setError({status: response.status, ...data})
             }
         } catch (e) {
-            setNumber(null)
+            setNumber('')
             setError({status: e.status, message: e.errorMessage})
         }
 
@@ -75,7 +75,7 @@ const SearchPage = () => {
     }, [tg, tg.MainButton])
 
     useEffect(() => {
-        if (!number || error.status ===401) {
+        if (number === '' || error.status ===401) {
             tg.MainButton.hide()
         } else {
             tg.MainButton.show()
