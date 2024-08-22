@@ -2,10 +2,9 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useTelegram} from "../../hooks/useTelegram";
 import DocumentView from "../../components/DocumentView/DocumentView";
+import Button from "../../components/Button/Button";
 import {BOT_SERVER_URL} from "../../config";
 import './search-page.css';
-import Button from "../../components/Button/Button";
-
 
 const SearchPage = () => {
     const {tg, user} = useTelegram()
@@ -16,8 +15,6 @@ const SearchPage = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const navigate = useNavigate()
-
-    tg.expand()
 
     const onSendData = useCallback(async () => {
         setLoading(true)
@@ -58,16 +55,6 @@ const SearchPage = () => {
         }
     }, [onSendData, tg])
 
-    // useEffect(() => {
-    //     if (error.status === 403) {
-    //         tg.MainButton.hide()
-    //     }
-    // }, [error, tg])
-
-    // useEffect(() => {
-    //     tg.expand()
-    // }, [tg])
-
     useEffect(() => {
         tg.MainButton.setParams({
             text: 'Поиск'
@@ -80,44 +67,44 @@ const SearchPage = () => {
         } else {
             tg.MainButton.show()
         }
-    }, [number, tg.MainButton, error.status])
+    }, [number, tg.MainButton, error])
 
     const onChangeNumber = (e) => {
         setNumber(e.target.value)
     }
 
-    const onKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            onSendLocalData().then()
-        }
-    }
-
-    const onSendLocalData = async () => {
-        setLoading(true)
-        // загрузка документа
-        try {
-            const response = await fetch(`${BOT_SERVER_URL}/documents?serialNumber=${number}&chat_id=311462440`)
-            const data = await response.json()
-            if (response.status === 200) {
-                //загрузка позиций документа
-                const docPositions = await fetch(`${BOT_SERVER_URL}/documentPositions/${data.id}?chat_id=${user.id}`)
-                const docPositionsJson = await docPositions.json()
-
-                // //загрузка истории согласования
-                const docAgreementHistory = await fetch(`${BOT_SERVER_URL}/agreementHistory/${data.id}?chat_id=${user.id}`)
-                const docAgreementHistoryJson = await docAgreementHistory.json()
-
-                setAgreementHistory(docAgreementHistoryJson)
-                setPositions(docPositionsJson)
-                setDocument(data)
-            } else {
-                setError({status: response.status, ...data})
-            }
-        } catch (e) {
-            setError(e)
-        }
-        setLoading(false)
-    }
+    // const onKeyPress = (e) => {
+    //     if (e.key === 'Enter') {
+    //         onSendLocalData().then()
+    //     }
+    // }
+    //
+    // const onSendLocalData = async () => {
+    //     setLoading(true)
+    //     // загрузка документа
+    //     try {
+    //         const response = await fetch(`${BOT_SERVER_URL}/documents?serialNumber=${number}&chat_id=311462440`)
+    //         const data = await response.json()
+    //         if (response.status === 200) {
+    //             //загрузка позиций документа
+    //             const docPositions = await fetch(`${BOT_SERVER_URL}/documentPositions/${data.id}?chat_id=${user.id}`)
+    //             const docPositionsJson = await docPositions.json()
+    //
+    //             // //загрузка истории согласования
+    //             const docAgreementHistory = await fetch(`${BOT_SERVER_URL}/agreementHistory/${data.id}?chat_id=${user.id}`)
+    //             const docAgreementHistoryJson = await docAgreementHistory.json()
+    //
+    //             setAgreementHistory(docAgreementHistoryJson)
+    //             setPositions(docPositionsJson)
+    //             setDocument(data)
+    //         } else {
+    //             setError({status: response.status, ...data})
+    //         }
+    //     } catch (e) {
+    //         setError(e)
+    //     }
+    //     setLoading(false)
+    // }
 
 
     const renderData = (document) => {
@@ -157,7 +144,6 @@ const SearchPage = () => {
 
     return (
         <>
-            test1
             {!loading && !document &&
                 <div className={'form'}>
                     <h3>Поиск:</h3>
@@ -166,14 +152,13 @@ const SearchPage = () => {
                         placeholder={'Введите номер документа'}
                         value={number}
                         onChange={onChangeNumber}
-                        onKeyPress={onKeyPress}
+                        // onKeyPress={onKeyPress}
                     />
                 </div>
             }
             {loading && <div className="center loader"></div>}
             {!loading && document && !error && renderData(document)}
             {error && renderError(error)}
-            {JSON.stringify(error)}
         </>
     )
 };
