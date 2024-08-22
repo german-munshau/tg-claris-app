@@ -38,8 +38,8 @@ const LoginPage = () => {
     useEffect(() => {
         tg.MainButton.setParams({
             text: 'Вход',
-            is_visible: true,
-            color: 'green'
+            // is_visible: true,
+            // color: 'green'
         })
     }, [tg.MainButton])
 
@@ -47,21 +47,21 @@ const LoginPage = () => {
         setLogin(e.target.value)
     }
 
-    // useEffect(() => {
-    //     if (!login || !password) {
-    //         tg.MainButton.disable()
-    //     } else {
-    //         tg.MainButton.enable()
-    //     }
-    // }, [login, password, tg.MainButton])
-
     useEffect(() => {
         if (!login || !password) {
-            tg.MainButton.hide()
+            tg.MainButton.disable()
         } else {
-            tg.MainButton.show()
+            tg.MainButton.enable()
         }
     }, [login, password, tg.MainButton])
+
+    // useEffect(() => {
+    //     if (!login || !password) {
+    //         tg.MainButton.hide()
+    //     } else {
+    //         tg.MainButton.show()
+    //     }
+    // }, [login, password, tg.MainButton])
 
     const onChangePassword = (e) => {
         setPassword(e.target.value)
