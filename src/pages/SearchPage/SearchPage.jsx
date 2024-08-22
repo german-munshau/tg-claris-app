@@ -131,6 +131,7 @@ const SearchPage = () => {
     }
 
     const renderError = (error) => {
+        setNumber(null)
         if (error.status === 403) {
             return (<div className={"auth-container"}>
                     <div className={"auth-message"}>{error.message}</div>
@@ -146,7 +147,7 @@ const SearchPage = () => {
 
     return (
         <>
-            {!loading && !document &&
+            {!loading && !document && !error &&
                 <div className={'form'}>
                     <h3>Поиск</h3>
                     <input
