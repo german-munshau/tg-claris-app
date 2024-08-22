@@ -54,11 +54,11 @@ const SearchPage = () => {
         }
     }, [onSendData, tg])
 
-    useEffect(() => {
-        if (error.status === 403) {
-            tg.MainButton.hide()
-        }
-    }, [error, tg])
+    // useEffect(() => {
+    //     if (error.status === 403) {
+    //         tg.MainButton.hide()
+    //     }
+    // }, [error, tg])
 
     useEffect(() => {
         tg.MainButton.setParams({
@@ -67,7 +67,7 @@ const SearchPage = () => {
     }, [tg.MainButton])
 
     useEffect(() => {
-        if (!number || document) {
+        if (!number || document || error.status === 403) {
             tg.MainButton.hide()
         } else {
             tg.MainButton.show()
