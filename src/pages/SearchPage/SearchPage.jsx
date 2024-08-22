@@ -70,7 +70,7 @@ const SearchPage = () => {
         tg.MainButton.setParams({
             text: 'Поиск'
         })
-    }, [tg.MainButton])
+    }, [tg, tg.MainButton])
 
     useEffect(() => {
         if (!number) {
