@@ -37,7 +37,7 @@ const LoginPage = () => {
 
     useEffect(() => {
         // растянуть на веь экран
-        tg.expand()
+        // tg.expand()
 
         tg.MainButton.setParams({
             text: 'Вход',
