@@ -55,6 +55,12 @@ const SearchPage = () => {
     }, [onSendData, tg])
 
     useEffect(() => {
+        if (error) {
+            tg.MainButton.hide()
+        }
+    }, [error, tg])
+
+    useEffect(() => {
         tg.MainButton.setParams({
             text: 'Поиск'
         })
