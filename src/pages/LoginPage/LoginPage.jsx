@@ -19,13 +19,13 @@ const LoginPage = () => {
 
     const onSendData = useCallback(async () => {
         const data = {login, password, queryId, chatId: user.id, messageId}
-            await fetch(`${BOT_SERVER_URL}/auth`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
+        await fetch(`${BOT_SERVER_URL}/auth`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
     }, [login, password, queryId, user, messageId])
 
     useEffect(() => {
@@ -36,14 +36,14 @@ const LoginPage = () => {
     }, [onSendData, tg])
 
     useEffect(() => {
-
+        tg.expand()
         tg.MainButton.setParams({
             text: 'Вход',
             is_visible: true,
-            color: '#cfcfcf'
+//            color: '#cfcfcf'
         })
         // tg.MainButton.show()
-    }, [tg.MainButton])
+    }, [tg, tg.MainButton])
 
     const onChangeLogin = (e) => {
         setLogin(e.target.value)
@@ -52,10 +52,16 @@ const LoginPage = () => {
     useEffect(() => {
         if (!login || !password) {
             tg.MainButton.disable()
+            tg.MainButton.setParams({
+                color: '#cfcfcf'
+            })
         } else {
             tg.MainButton.enable()
+            tg.MainButton.setParams({
+                color: '#2cab37'
+            })
         }
-    }, [login, password, tg.MainButton])
+    }, [login, password, tg.MainButton, tg])
 
     // useEffect(() => {
     //     if (!login || !password) {
