@@ -77,7 +77,7 @@ const SearchPage = () => {
     }, [tg, tg.MainButton])
 
     useEffect(() => {
-        if (!number || error.status ===403) {
+        if (!number || error.status ===401) {
             tg.MainButton.hide()
         } else {
             tg.MainButton.show()
@@ -135,7 +135,7 @@ const SearchPage = () => {
     }
 
     const renderError = (error) => {
-        if (error.status === 403) {
+        if (error.status === 401) {
             return (<div className={"auth-container"}>
                     <div className={"auth-message"}>{error.message}</div>
                     <Button label={"Перейти"} onClick={() => navigate('/login')}/>
