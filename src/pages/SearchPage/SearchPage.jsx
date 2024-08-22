@@ -160,7 +160,7 @@ const SearchPage = () => {
             test1
             {!loading && !document &&
                 <div className={'form'}>
-                    <h3>Поиск</h3>
+                    <h3>Поиск:</h3>
                     <input
                         type={'text'}
                         placeholder={'Введите номер документа'}
