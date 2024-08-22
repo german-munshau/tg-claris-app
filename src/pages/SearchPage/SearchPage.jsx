@@ -69,8 +69,6 @@ const SearchPage = () => {
     // }, [tg])
 
     useEffect(() => {
-
-
         tg.MainButton.setParams({
             text: 'Поиск'
         })
@@ -135,18 +133,27 @@ const SearchPage = () => {
     }
 
     const renderError = (error) => {
-        if (error.status === 401) {
             return (<div className={"auth-container"}>
+                    <div className={"auth-message"}>{error.status}</div>
                     <div className={"auth-message"}>{error.message}</div>
                     <Button label={"Перейти"} onClick={() => navigate('/login')}/>
                 </div>
             )
-        }
-        return (
-            <div className={"center document-not-found"}>{error.message}</div>
-        )
-
     }
+
+    // const renderError = (error) => {
+    //     if (error.status === 401) {
+    //         return (<div className={"auth-container"}>
+    //                 <div className={"auth-message"}>{error.message}</div>
+    //                 <Button label={"Перейти"} onClick={() => navigate('/login')}/>
+    //             </div>
+    //         )
+    //     }
+    //     return (
+    //         <div className={"center document-not-found"}>{error.message}</div>
+    //     )
+    //
+    // }
 
     return (
         <>
