@@ -59,7 +59,7 @@ const LoginPage = () => {
             tg.MainButton.enable()
             tg.MainButton.setParams({
                 // color: '#2cab37'
-                color: 'var(--tg-theme-button-color)'
+                color: tg.ThemeParams.button_color
             })
         }
     }, [login, password, tg.MainButton, tg])
