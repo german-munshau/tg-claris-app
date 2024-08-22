@@ -36,13 +36,13 @@ const LoginPage = () => {
     }, [onSendData, tg])
 
     useEffect(() => {
+        // растянуть на веь экран
         tg.expand()
+
         tg.MainButton.setParams({
             text: 'Вход',
             is_visible: true,
-//            color: '#cfcfcf'
         })
-        // tg.MainButton.show()
     }, [tg, tg.MainButton])
 
     const onChangeLogin = (e) => {
@@ -58,7 +58,8 @@ const LoginPage = () => {
         } else {
             tg.MainButton.enable()
             tg.MainButton.setParams({
-                color: '#2cab37'
+                // color: '#2cab37'
+                color: 'var(--tg-theme-button-color)'
             })
         }
     }, [login, password, tg.MainButton, tg])
