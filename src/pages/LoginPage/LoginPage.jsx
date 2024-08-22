@@ -36,11 +36,13 @@ const LoginPage = () => {
     }, [onSendData, tg])
 
     useEffect(() => {
+
         tg.MainButton.setParams({
             text: 'Вход',
-            // is_visible: true,
+            is_visible: true,
             // color: 'green'
         })
+        // tg.MainButton.show()
     }, [tg.MainButton])
 
     const onChangeLogin = (e) => {
