@@ -61,13 +61,17 @@ const SearchPage = () => {
     // }, [error, tg])
 
     useEffect(() => {
+        tg.expand()
+    }, [tg])
+
+    useEffect(() => {
         tg.MainButton.setParams({
             text: 'Поиск'
         })
     }, [tg.MainButton])
 
     useEffect(() => {
-        if (!number || document || error?.status === 403) {
+        if (!number || !document || error?.status === 403) {
             tg.MainButton.hide()
         } else {
             tg.MainButton.show()
