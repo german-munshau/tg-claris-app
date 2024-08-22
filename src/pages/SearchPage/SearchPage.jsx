@@ -17,6 +17,8 @@ const SearchPage = () => {
     const [error, setError] = useState(null)
     const navigate = useNavigate()
 
+    tg.expand()
+
     const onSendData = useCallback(async () => {
         setLoading(true)
         setError(null)
@@ -38,9 +40,11 @@ const SearchPage = () => {
                 setPositions(docPositionsJson)
                 setDocument(data)
             } else {
+                setNumber(null)
                 setError({status: response.status, ...data})
             }
         } catch (e) {
+            setNumber(null)
             setError({status: e.status, message: e.errorMessage})
         }
 
@@ -65,7 +69,7 @@ const SearchPage = () => {
     // }, [tg])
 
     useEffect(() => {
-        tg.expand()
+
 
         tg.MainButton.setParams({
             text: 'Поиск'
@@ -131,7 +135,6 @@ const SearchPage = () => {
     }
 
     const renderError = (error) => {
-        setNumber(null)
         if (error.status === 403) {
             return (<div className={"auth-container"}>
                     <div className={"auth-message"}>{error.message}</div>
