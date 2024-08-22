@@ -134,8 +134,8 @@ const SearchPage = () => {
 
     const renderError = (error) => {
             return (<div className={"auth-container"}>
-                    <div className={"auth-message"}>{error.status}</div>
-                    <div className={"auth-message"}>{error.message}</div>
+                    <div className={"auth-message"}>{JSON.stringify(error)}</div>
+                    {/*<div className={"auth-message"}>{error.message}</div>*/}
                     <Button label={"Перейти"} onClick={() => navigate('/login')}/>
                 </div>
             )
@@ -157,6 +157,7 @@ const SearchPage = () => {
 
     return (
         <>
+            test1
             {!loading && !document &&
                 <div className={'form'}>
                     <h3>Поиск</h3>
@@ -172,6 +173,7 @@ const SearchPage = () => {
             {loading && <div className="center loader"></div>}
             {!loading && document && !error && renderData(document)}
             {error && renderError(error)}
+            {JSON.stringify(error)}
         </>
     )
 };
