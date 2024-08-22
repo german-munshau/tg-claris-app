@@ -41,7 +41,7 @@ const LoginPage = () => {
 
         tg.MainButton.setParams({
             text: 'Вход',
-//            is_visible: true,
+            is_visible: true,
         })
     }, [tg, tg.MainButton])
 
