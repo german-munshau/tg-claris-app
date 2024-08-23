@@ -6,6 +6,7 @@ import Button from "../../components/Button/Button";
 import {BOT_SERVER_URL} from "../../config";
 import './search-page.css';
 
+
 const SearchPage = () => {
     const {tg, user} = useTelegram()
     const [number, setNumber] = useState('')
@@ -37,11 +38,9 @@ const SearchPage = () => {
                 setPositions(docPositionsJson)
                 setDocument(data)
             } else {
-                setNumber('')
                 setError({status: response.status, ...data})
             }
         } catch (e) {
-            setNumber('')
             setError({status: e.status, message: e.errorMessage})
         }
 
@@ -62,49 +61,50 @@ const SearchPage = () => {
     }, [tg, tg.MainButton])
 
     useEffect(() => {
-        if (number === '' || (error?.status === 401)) {
+        if (number === '' || (error?.status === 401) || document) {
             tg.MainButton.hide()
         } else {
             tg.MainButton.show()
         }
-    }, [number, tg.MainButton, error])
+    }, [number, tg.MainButton, error, document])
 
     const onChangeNumber = (e) => {
         setNumber(e.target.value)
     }
 
-    // const onKeyPress = (e) => {
-    //     if (e.key === 'Enter') {
-    //         onSendLocalData().then()
-    //     }
-    // }
-    //
-    // const onSendLocalData = async () => {
-    //     setLoading(true)
-    //     // загрузка документа
-    //     try {
-    //         const response = await fetch(`${BOT_SERVER_URL}/documents?serialNumber=${number}&chat_id=311462440`)
-    //         const data = await response.json()
-    //         if (response.status === 200) {
-    //             //загрузка позиций документа
-    //             const docPositions = await fetch(`${BOT_SERVER_URL}/documentPositions/${data.id}?chat_id=${user.id}`)
-    //             const docPositionsJson = await docPositions.json()
-    //
-    //             // //загрузка истории согласования
-    //             const docAgreementHistory = await fetch(`${BOT_SERVER_URL}/agreementHistory/${data.id}?chat_id=${user.id}`)
-    //             const docAgreementHistoryJson = await docAgreementHistory.json()
-    //
-    //             setAgreementHistory(docAgreementHistoryJson)
-    //             setPositions(docPositionsJson)
-    //             setDocument(data)
-    //         } else {
-    //             setError({status: response.status, ...data})
-    //         }
-    //     } catch (e) {
-    //         setError(e)
-    //     }
-    //     setLoading(false)
-    // }
+    const onKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            onSendLocalData().then()
+        }
+    }
+
+    const onSendLocalData = async () => {
+        setLoading(true)
+        setError(null)
+        // загрузка документа
+        try {
+            const response = await fetch(`${BOT_SERVER_URL}/documents?serialNumber=${number}&chat_id=311462440`)
+            const data = await response.json()
+            if (response.status === 200) {
+                //загрузка позиций документа
+                const docPositions = await fetch(`${BOT_SERVER_URL}/documentPositions/${data.id}?chat_id=311462440`)
+                const docPositionsJson = await docPositions.json()
+
+                // //загрузка истории согласования
+                const docAgreementHistory = await fetch(`${BOT_SERVER_URL}/agreementHistory/${data.id}?chat_id=311462440`)
+                const docAgreementHistoryJson = await docAgreementHistory.json()
+
+                setAgreementHistory(docAgreementHistoryJson)
+                setPositions(docPositionsJson)
+                setDocument(data)
+            } else {
+                setError({status: response.status, ...data})
+            }
+        } catch (e) {
+            setError({status: e.status, message: e.errorMessage})
+        }
+        setLoading(false)
+    }
 
 
     const renderData = (document) => {
@@ -120,39 +120,29 @@ const SearchPage = () => {
     }
 
     const renderError = (error) => {
-        return (<div className={"auth-container"}>
-                <div className={"auth-message"}>{JSON.stringify(error)}</div>
-                {/*<div className={"auth-message"}>{error.message}</div>*/}
-                <Button label={"Перейти"} onClick={() => navigate('/login')}/>
-            </div>
+        if (error.status === 401) {
+            return (<div className={"auth-container"}>
+                    <div className={"auth-message"}>{error.message}</div>
+                    <Button label={"Перейти"} onClick={() => navigate('/login')}/>
+                </div>
+            )
+        }
+        return (
+            <div className={"center document-not-found"}>{error.message}</div>
         )
     }
-
-    // const renderError = (error) => {
-    //     if (error.status === 401) {
-    //         return (<div className={"auth-container"}>
-    //                 <div className={"auth-message"}>{error.message}</div>
-    //                 <Button label={"Перейти"} onClick={() => navigate('/login')}/>
-    //             </div>
-    //         )
-    //     }
-    //     return (
-    //         <div className={"center document-not-found"}>{error.message}</div>
-    //     )
-    //
-    // }
 
     return (
         <>
             {!loading && !document &&
                 <div className={'form'}>
-                    <h3>Поиск:</h3>
+                    <h3>Поиск</h3>
                     <input
                         type={'text'}
                         placeholder={'Введите номер документа'}
                         value={number}
                         onChange={onChangeNumber}
-                        // onKeyPress={onKeyPress}
+                        onKeyPress={onKeyPress}
                     />
                 </div>
             }

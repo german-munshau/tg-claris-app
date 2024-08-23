@@ -22,7 +22,7 @@ const DocumentPositions = ({data}) => {
                             <td className={'document-position-name'}>{item.assetText}</td>
                             <td className={'document-position-digit'}>{item.positionsCount}</td>
                             <td className={'document-position-digit'}>{getCurrency(item.price)}</td>
-                            <td className={'document-position-digit'}>{getCurrency(item.amount)}</td>
+                            <td className={'document-position-digit'}>{getCurrency(item.amountWithNDS)}</td>
                         </tr>
                     ))}
                     </tbody>
