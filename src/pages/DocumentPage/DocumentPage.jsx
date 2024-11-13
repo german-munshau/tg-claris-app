@@ -26,7 +26,8 @@ const DocumentPage = () => {
         const message_id = searchParams.get('message_id')
         setChatId(chat_id)
         setMessageId(message_id)
-    }, [searchParams])
+        tg.expand()
+    }, [searchParams, tg])
 
     useEffect(() => {
         // запрос в бота для получения данных по документу
@@ -101,30 +102,21 @@ const DocumentPage = () => {
     }
 
 
+    const onPayHandle = async () => {
+        const response = await fetch(`${BOT_SERVER_URL}/documents/${id}/pay`, options(document.serialNumber))
+        if (response.status !== 200) {
+            const data = await response.json()
+            tg.showPopup({
+                title: 'Оплачено',
+                message: data.message,
+            })
+        }
+        onClose()
+    }
+
     const onChangeComment = (e) => {
         setComment(e.target.value)
     }
-    // const onDisagreeHandle = async () => {
-    //     await fetch(`${BOT_SERVER_URL}/documents/${id}/disagree`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //             comment: 'отклонено', chatId, messageId,
-    //             number: document.serialNumber
-    //         })
-    //     })
-    //         .then((data) => {
-    //             console.log(data)
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //         })
-    //         .finally(() => {
-    //             onClose()
-    //         })
-    // }
 
     const renderData = (document) => {
         return (
@@ -146,6 +138,7 @@ const DocumentPage = () => {
                 <div className={'button-container'}>
                     <Button onClick={onAgreeHandle} label={"Согласовать"} className={"btn-agree"}/>
                     <Button onClick={onDisagreeHandle} label={"Отклонить"} className={"btn-disagree"}/>
+                    <Button onClick={onPayHandle} label={"Срочно Оплатить"} className={"btn-agree"}/>
                 </div>
             </div>
         )

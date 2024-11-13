@@ -34,3 +34,26 @@ export const getCurrency = (currency) => {
     }
     return null
 };
+
+const options = {
+    // era: 'long',
+    // year: 'numeric',
+    year: 'numeric',
+    // month: 'long',
+    month: 'short',
+    // month: 'numeric',
+    day: 'numeric',
+    // weekday: 'long',
+    timezone: 'UTC',
+    // hour: 'numeric',
+    // minute: 'numeric',
+    // second: 'numeric'
+};
+
+export const getDateValue = (dateString) => {
+    if (dateString) {
+        const date = new Date(dateString)
+        return date.toLocaleString("ru", options)
+    }
+    return null
+};

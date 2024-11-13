@@ -1,10 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useTelegram} from "../../hooks/useTelegram";
-import DocumentView from "../../components/DocumentView/DocumentView";
+import SearchDocumentView from "../../components/SearchView/SearchDocumentView";
 import Button from "../../components/Button/Button";
 import {BOT_SERVER_URL} from "../../config";
 import './search-page.css';
+
 
 
 const SearchPage = () => {
@@ -106,11 +107,10 @@ const SearchPage = () => {
         setLoading(false)
     }
 
-
     const renderData = (document) => {
         return (
             <div className={"document-page-container"}>
-                <DocumentView
+                <SearchDocumentView
                     document={document}
                     positions={positions}
                     agreementHistory={agreementHistory}
@@ -142,7 +142,7 @@ const SearchPage = () => {
                         placeholder={'Введите номер документа'}
                         value={number}
                         onChange={onChangeNumber}
-                        onKeyPress={onKeyPress}
+                        onKeyDown={onKeyPress}
                     />
                 </div>
             }

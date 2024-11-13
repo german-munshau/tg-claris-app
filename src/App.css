@@ -21,7 +21,7 @@ input {
 
 button {
     border: solid 1px;
-    padding: 8px;
+    padding: 4px;
     min-width: 100px;
     cursor: pointer;
     background: var(--tg-theme-bg-color);
@@ -30,19 +30,22 @@ button {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-transform: uppercase;
     margin: 5px;
+    font-size: 12px;
 }
 
 table {
     width: 100%;
     font-family: monospace;
-    padding: 2px;
+    border-spacing: 0;
+    /*padding: 2px;*/
 }
 
 thead {
     position: sticky;
     background-color: var(--tg-theme-bg-color);
     color: var(--tg-theme-text-color);
-    top: 0;
+    /*top: 0;*/
+    top: -5px;
 }
 
 td, th {
@@ -63,6 +66,7 @@ td, th {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    /*height: 98vh;*/
 }
 
 .btn-agree {
@@ -77,7 +81,57 @@ td, th {
 
 .button-container {
     display: flex;
-    padding: 20px 10px;
+    padding: 20px 10px 0;
     justify-content: space-around;
     width: 100%;
+}
+
+.document-details-container {
+    width: 100%;
+    padding: 5px 10px 10px 10px;
+    overflow-y: auto;
+}
+
+.detail-checkbox-container {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    padding: 6px;
+}
+
+.detail-label {
+    padding-left: 4px;
+}
+
+.detail-checkbox {
+    padding: 0;
+    margin: 0;
+    width: 20px;
+}
+
+.document-position-text {
+    border-color: inherit;
+    text-align: left;
+    vertical-align: top;
+    padding-left: 0;
+}
+
+.document-position-digit {
+    border-color: inherit;
+    text-align: right;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+.document-position-title {
+    font-family: monospace;
+    text-align: left;
+    padding-left: 10px;
+    font-size: 17px;
+}
+
+.document-item {
+    font-family: monospace;
+    padding-bottom: 5px;
 }

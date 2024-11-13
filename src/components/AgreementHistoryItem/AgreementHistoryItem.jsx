@@ -1,6 +1,5 @@
 import React from 'react';
 import {getDateTime} from "../../utils/utils";
-import './agreementhistory-item.css'
 
 const AgreementHistoryItem = ({item}) => {
     return (
